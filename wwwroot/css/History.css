@@ -3,20 +3,12 @@
   width:  1320px;
   margin: 0 auto;
 }
-
-.HeadName
-{
-  display: inline-block;
-  margin: 2px;
-  color: rgba(102, 58, 42, 1);
-  
-}
 .rectangle
 {
   background-color: #DFD6D3;
   width: 550px;
   height: 45px;
- 
+ align-self:center;
   
   
   border-radius: 7px;
@@ -25,7 +17,33 @@
   margin-left: 353px;
   
 }
+h1 {
+    margin-top: 10px;
+    margin-bottom: 0px;
+    color: #663A2A;
+    font-size: 30px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-family: Arial;
+}
 
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 0px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.Logo-image {
+    width: 60px;
+    height: 60px;
+    background-image: url(/images/logo.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+}
 .main
 {
   
@@ -58,7 +76,6 @@
   background-color: white;
   margin: 50px;
   font-size: x-large;
-  overflow: scroll;
   line-height: 2.5;
 
 }
@@ -70,7 +87,6 @@
   background-color: white;
   margin: 50px;
   font-size: x-large;
-  overflow: scroll;
   line-height: 2.5;
 }
 .block3
@@ -81,7 +97,6 @@
   background-color: white;
   margin: 50px;
   font-size: x-large;
-  overflow: scroll;
   line-height: 2.5;
 }
 .contentinblock
@@ -112,6 +127,7 @@
   margin: 10px;
   color: white;
   margin-top: 70px;
+  line-height:0px;
 }
 
 .button4
