@@ -1,0 +1,48 @@
+﻿@page
+@model AddHistoryModel
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/AddHistory.css">
+</head>
+<body>
+    <div class="header">
+        <div class="Logo-image"></div>
+        <h1>Добавление истории</h1>
+    </div>
+    <div class="frame-container">
+        <div class="UserText">Оборудование</div>
+        <div class="custom-select">
+            <select>
+                <option value="0"></option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </div>
+        <div class="UserText">Ответственный</div>
+        <div class="custom-select">
+            <select>
+                <option value="0"></option>
+                <option value="1">Иванов Иван Иванович</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </div>
+        <div class="PriceText">Дата</div>
+        <input class="text-field__input" type="text">
+        <div class="buttonsadd">
+            <a class="a1" asp-page="/History"><button class="buttonBack"><span>Назад</span></button></a>
+            <a class="a1" asp-page="/History"><button class="buttonAdd"><span>Добавить</span></button></a>
+        </div>
+    </div>
+</body>
+</html>

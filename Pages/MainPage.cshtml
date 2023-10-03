@@ -1,0 +1,27 @@
+﻿@page
+@model MainPageModel
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/MainPage.css">
+</head>
+<body>
+    <div class="frame-container">
+        <div class="header">
+            <div class="Logo-image"></div>
+            <i>Inventarization</i>
+        </div>
+        <a class="a1" asp-page="/MainPage"><button class="UsersClick">Пользователи</button></a>
+        <a class="a1" asp-page="/Equipment"><button class="EquipClick">Оборудование</button></a>
+        <a class="a1" asp-page="/History"><button class="HistoryCLick">История перемещений</button></a>
+        <a class="a1" asp-page="/TypeEquipment"><button class="TypeClick">Тип оборудования</button></a>
+        <a class="a1" asp-page="/PersonalАccount"><button class="ProfileClick">Личный кабинет</button></a>
+    </div>
+</body>
+</html>

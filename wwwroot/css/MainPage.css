@@ -1,0 +1,120 @@
+body {
+  margin: 0;
+  background-color: rgba(151, 110, 92, 0.6);
+}
+i{
+  margin-top: 10px;
+  margin-bottom: 0px;
+  align-self: center;
+  color: #663A2A;
+  font-size: 40px;
+  padding-left: 30px;
+  font-family: Arial;
+  font-weight: bold;
+}
+.header{
+  display: flex;
+  flex-direction: row;
+  padding-left:  50px;
+  padding-top: 20px;
+}
+.Logo-image {
+    width: 140px;
+    height: 140px;
+    background-image: url(/images/logoFull.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+}
+.frame-container {
+  background-color: white;
+  height: 100vh;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+}
+.UsersClick {
+  padding: 10px;
+  border-radius: 5px;
+  align-self:flex-start;
+  border: none;
+  background-color: white;
+  margin: 20px;
+  color: black;
+  font-size: 32px;
+  font-style: Regular;
+  font-family: Arial;
+  font-weight: bold;
+}
+.UsersClick:hover{
+  background-color: #E84B37;
+  color: white;
+}
+.EquipClick {
+  padding: 10px;
+  border-radius: 5px;
+  align-self:flex-start;
+  border: none;
+  background-color: white;
+  margin: 20px;
+color: black;
+font-size: 32px;
+font-style: Regular;
+font-family: Arial;
+font-weight: bold;
+}
+.EquipClick:hover{
+  background-color: #E84B37;
+  color: white;
+}
+.HistoryCLick {
+  padding: 10px;
+  border-radius: 5px;
+  align-self:flex-start;
+  border: none;
+  background-color: white;
+  margin: 20px;
+  color: black;
+  font-size: 32px;
+  font-style: Regular;
+  font-family: Arial;
+  font-weight: bold;
+}
+.HistoryCLick:hover{
+  background-color: #E84B37;
+  color: white;
+}
+.TypeClick {
+  padding: 10px;
+  border-radius: 5px;
+  align-self:flex-start;
+  border: none;
+  background-color: white;
+  margin: 20px;
+  color: black;
+  font-size: 32px;
+  font-style: Regular;
+  font-family: Arial;
+  font-weight: bold;
+}
+.TypeClick:hover{
+  background-color: #E84B37;
+  color: white;
+}
+.ProfileClick {
+  padding: 10px;
+  border-radius: 5px;
+  align-self:flex-start;
+  border: none;
+  background-color: white;
+  margin: 20px;
+color: black;
+font-size: 32px;
+font-style: Regular;
+font-family: Arial;
+font-weight: bold;
+}
+.ProfileClick:hover{
+  background-color: #E84B37;
+  color: white;
+}

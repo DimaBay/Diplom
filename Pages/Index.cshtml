@@ -1,0 +1,38 @@
+﻿@page
+@model IndexModel
+@{
+    
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Изменение оборудования</title>
+
+</head>
+<div>
+    <script src="/js/site.js"></script>
+    <link href="/css/Login.css" rel="stylesheet" />
+    <div class="bg-image"></div>
+    <div class="frame-container">
+        <div class="frame-frame">
+            <div class="SignInText">SING IN</div>
+            <div class="UsernameText">Username</div>
+            <div class="text-field__icon text-field__icon_login">
+                <input class="text-field__input" type="text">
+            </div>
+            <div class="PasswordText">Password</div>
+            <div class="text-field__icon text-field__icon_pwd">
+                <input class="text-field__input" type="text">
+            </div>
+            <div class="KeepLoggedInT">
+                <input type="checkbox" class="checkbox-round" id="scales" name="scales" />
+                <label for="scales">keep me logged in</label>
+            </div>
+
+            <button class="buttonLogIn" PostBackUrl="/MainPage"><span><a class="a1" asp-page="/MainPage">Login</a></span></button>
+            
+            
+        </div>
+    </div>
+</div>

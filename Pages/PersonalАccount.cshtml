@@ -1,0 +1,37 @@
+﻿@page
+@model PersonalАccountModel
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет</title>
+    <link rel="stylesheet" href="/css/PersonalАccount.css">
+</head>
+<body>
+    <div class="header">
+        <div class="Logo-image"></div>
+        <h1>Личный кабинет</h1>
+    </div>
+    <div class="frame-container">
+        <div class="NameText">ФИО</div>
+        <input class="text-field__input" type="text">
+        <div class="DescriptionText">Логин</div>
+        <input class="text-field__input" type="text">
+        <div class="CharText">Пароль</div>
+        <input class="text-field__input" type="text">
+        <div class="Email">Почта</div>
+        <input class="text-field__input" type="text">
+        <div class="ResponsibleEquipment">Ответственное оборудование</div>
+        <input class="text-field__input" type="text">
+    </div>
+    <div class="buttonsadd">
+        <a class="a1" asp-page="/MainPage"> <button class="buttonBack"><span>Назад</span></button></a>
+        <a class="a1" asp-page="/ChangePassword"> <button class="buttonChangePassword"><span>Изменить пароль</span></button></a>
+        <a class="a1" asp-page="/Changepoliz"> <button class="buttonAdd"><span>Добавить</span></button></a>
+    </div>
+</body>
+</html>
