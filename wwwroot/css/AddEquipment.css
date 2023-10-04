@@ -147,8 +147,8 @@ padding-top: 20px;
 }
 .custom-select {
   align-self: center;
-  width: 91.3%;
-  height: 50px;
+  width: 90%;
+  height: 40px;
   font-family: Arial;
 }
 
@@ -163,7 +163,7 @@ padding-top: 20px;
   font-family: Arial;
   font-size: 20px;
   width: 100%;
-  height: 50px;
+  height: 40px;
   background-color: rgba(195, 147, 103, 0.2);
   
 }
