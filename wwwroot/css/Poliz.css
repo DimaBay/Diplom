@@ -1,6 +1,7 @@
 .body {
     width: 1320px;
     margin: 0 auto;
+    font-size: revert;
 }
 
 .HeadName {
@@ -19,7 +20,7 @@
 }
 
 .main {
-    height: 800px;
+    height: 780px;
     border-radius: 10px;
     background: rgba(195, 147, 103, 0.6);
     overflow: scroll;
@@ -44,8 +45,7 @@
     background-color: white;
     margin: 50px;
     font-size: x-large;
-    overflow: scroll;
-    line-height: 2.5;
+    line-height: 1.8;
 }
 
 .block2 {
@@ -55,8 +55,7 @@
     background-color: white;
     margin: 50px;
     font-size: x-large;
-    overflow: scroll;
-    line-height: 2.5;
+    line-height: 1.8;
 }
 
 .block3 {
@@ -66,14 +65,13 @@
     background-color: white;
     margin: 50px;
     font-size: x-large;
-    overflow: scroll;
-    line-height: 2.5;
+    line-height: 1.8;
 }
 
 .contentinblock {
     float: left;
     padding-left: 30px;
-    padding-top: 15px;
+   
     padding-bottom: 15px;
 }
 
@@ -83,6 +81,7 @@
     padding-top: 12px;
     padding-bottom: 12px;
     line-height: 3.3;
+    
 }
 
 .button2 {
@@ -107,8 +106,9 @@
 .button4 {
     border-radius: 7px;
     background: rgba(195, 147, 103, 1);
-    width: 160px;
-    height: 45px;
+    width: 200px;
+    height: 60px;
+    font-size: 24px;
     margin: 10px;
     color: white;
 }
@@ -134,8 +134,9 @@
 .button7 {
     border-radius: 7px;
     background: rgba(224, 78, 57, 0.8);
-    width: 160px;
-    height: 45px;
+    width: 200px;
+    height: 60px;
+    font-size: 24px;
     margin: 10px;
     color: white;
     float: right;

@@ -43,7 +43,7 @@ h1 {
 .main
 {
   
-  height: 800px;
+  height: 776px;
  
   border-radius: 10px;
   background: rgba(195, 147, 103, 0.6);
@@ -133,15 +133,14 @@ h1 {
     margin-top: 25px;
     line-height: 0px;
 }
-.button4
-{
-  border-radius: 7px;
-  background: rgba(195, 147, 103, 1);
-
-  width: 160px;
-  height: 45px;
-  margin: 10px;
-  color: white;
+.button4 {
+    border-radius: 7px;
+    background: rgba(195, 147, 103, 1);
+    width: 200px;
+    height: 60px;
+    font-size: 24px;
+    margin: 10px;
+    color: white;
 }
 .button5
 {
@@ -163,16 +162,15 @@ h1 {
   margin: 10px;
   color: white;
 }
-.button7
-{
-  border-radius: 7px;
-  background: rgba(224, 78, 57, 0.8);
-
-  width: 160px;
-  height: 45px;
-  margin: 10px;
-  color: white;
-  float: right;
+.button7 {
+    border-radius: 7px;
+    background: rgba(224, 78, 57, 0.8);
+    width: 200px;
+    height: 60px;
+    font-size: 24px;
+    margin: 10px;
+    color: white;
+    float: right;
 }
 .sidebar
 {

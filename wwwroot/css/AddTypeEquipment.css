@@ -79,7 +79,7 @@ h1{
     appearance: none;
   }
   .buttonsadd{
-    padding-top: 400px;
+    padding-top: 380px;
   }
 .buttonAdd{
   margin: 20px;
@@ -87,13 +87,11 @@ h1{
   float: right;
   width: 200px;
   height: 60px;
-  font-size: 27px;
+  font-size: 24px;
   border-radius: 7px;
-  font-style: Regular;
-  text-align: center;
-  font-family: Arial;
-  align-self: center;
-  border: none;
+  
+ 
+  
   color: white;
   background-color: rgba(224, 78, 57, 0.8);
 }
@@ -103,12 +101,10 @@ h1{
   width: 200px;
   height: 60px;
   border-radius: 7px;
-  font-size: 27px;
-  font-style: Regular;
-  text-align: center;
-  font-family: Arial;
-  align-self: center;
-  border: none;
+  font-size: 24px;
+  
+
+  
   color: white;
   background-color: rgba(195, 147, 103, 1.0);
 }

@@ -61,7 +61,7 @@ h1 {
   background-color: white;
   margin: 50px;
   font-size: large;
-  overflow: scroll;
+  
   line-height: 1.5;
 }
 .block2
@@ -72,7 +72,7 @@ h1 {
   background-color: white;
   margin: 50px;
   font-size: large;
-  overflow: scroll;
+  
   line-height: 1.5;
 }
 .block3
@@ -83,7 +83,7 @@ h1 {
   background-color: white;
   margin: 50px;
   font-size: large;
-  overflow: scroll;
+  
   line-height: 1.5;
 }
 .contentinblock
@@ -130,44 +130,40 @@ h1 {
   margin: 10px;
   color: white;
 }
-.button4
-{
-  border-radius: 7px;
-  background: rgba(195, 147, 103, 1);
-
-  width: 160px;
-  height: 45px;
-  margin: 10px;
-  color: white;
+.button4 {
+    border-radius: 7px;
+    background: rgba(195, 147, 103, 1);
+    width: 200px;
+    height: 60px;
+    font-size: 24px;
+    margin: 10px;
+    color: white;
 }
-.button5
-{
-  border-radius: 7px;
-  background: rgba(102, 58, 42, 1);
-
-  width: 160px;
-  height: 45px;
-  margin: 10px;
-  color: white;
+.button5 {
+    border-radius: 7px;
+    background: rgba(102, 58, 42, 1);
+    width: 200px;
+    height: 60px;
+    font-size: 24px;
+    margin: 10px;
+    color: white;
 }
-.button6
-{
-  border-radius: 7px;
-  background: rgba(102, 58, 42, 1);
-
-  width: 160px;
-  height: 45px;
-  margin: 10px;
-  color: white;
+.button6 {
+    border-radius: 7px;
+    background: rgba(102, 58, 42, 1);
+    width: 200px;
+    height: 60px;
+    font-size: 24px;
+    margin: 10px;
+    color: white;
 }
-.button7
-{
-  border-radius: 7px;
-  background: rgba(224, 78, 57, 0.8);
-
-  width: 160px;
-  height: 45px;
-  margin: 10px;
-  color: white;
-  float: right;
+.button7 {
+    border-radius: 7px;
+    background: rgba(224, 78, 57, 0.8);
+    width: 200px;
+    height: 60px;
+    font-size: 24px;
+    margin: 10px;
+    color: white;
+    float: right;
 }

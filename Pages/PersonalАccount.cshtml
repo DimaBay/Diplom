@@ -26,12 +26,21 @@
         <div class="Email">Почта</div>
         <input class="text-field__input" type="text">
         <div class="ResponsibleEquipment">Ответственное оборудование</div>
-        <input class="text-field__input" type="text">
+        @* <input class="text-field__input" type="text"> *@
+        <div class="custom-select">
+            <select>
+                <option value="0"></option>
+                <option value="1">Иванов Иван Иванович</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+        </div>
     </div>
     <div class="buttonsadd">
         <a class="a1" asp-page="/MainPage"> <button class="buttonBack"><span>Назад</span></button></a>
         <a class="a1" asp-page="/ChangePassword"> <button class="buttonChangePassword"><span>Изменить пароль</span></button></a>
-        <a class="a1" asp-page="/Changepoliz"> <button class="buttonAdd"><span>Добавить</span></button></a>
+        <a class="a1" asp-page="/MainPage"> <button class="buttonAdd"><span>Добавить</span></button></a>
     </div>
 </body>
 </html>
