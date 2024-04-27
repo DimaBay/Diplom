@@ -1,36 +1,1125 @@
 ﻿@page
-@model IndexModel
+
+@using inventory
+@model inventory.Pages.IndexModel
 @{
-    
+
 }
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Изменение оборудования</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>МФЦ-ИНВЕНТ</title>
+	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
+	<link rel="icon" href="http://mfc-perm.ru/favicon.ico" type="image/x-icon" />
 
+	<!-- Fonts and icons -->
+	<script src="assets/js/plugin/webfont/webfont.min.js"></script>
+	<script>
+		WebFont.load({
+			google: { "families": ["Lato:300,400,700,900"] },
+			custom: { "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands", "simple-line-icons"], urls: ['assets/css/fonts.min.css'] },
+			active: function () {
+				sessionStorage.fonts = true;
+			}
+		});
+	</script>
+
+
+
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/qrcode.js"></script>
+
+
+
+
+
+	<!-- CSS Files -->
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/atlantis.min.css">
+
+	<!-- CSS Just for demo purpose, don't include it in your project -->
+	<link rel="stylesheet" href="assets/css/demo.css">
 </head>
-<div>
-    <script src="/js/site.js"></script>
-    <link href="/css/Login.css" rel="stylesheet" />
-    <div class="bg-image"></div>
-    <div class="frame-container">
-        <div class="frame-frame">
-            <div class="SignInText">SING IN</div>
-            <div class="UsernameText">Username</div>
-            <div class="text-field__icon text-field__icon_login">
-                <input class="text-field__input" type="text">
-            </div>
-            <div class="PasswordText">Password</div>
-            <div class="text-field__icon text-field__icon_pwd">
-                <input class="text-field__input" type="text">
-            </div>
-            <div class="KeepLoggedInT">
-                <input type="checkbox" class="checkbox-round" id="scales" name="scales" />
-                <label for="scales">keep me logged in</label>
-            </div>
-            <a class="a1" asp-page="/MainPage"><button class="buttonLogIn"><span>LOGIN</span></button></a>
-        </div>
-    </div>
-</div>
+<body data-background-color="bg3">
+	<div class="wrapper">
+		<div class="main-header">
+			<!-- Logo Header -->
+			<div class="logo-header" data-background-color="white">
 
+				<a href="index" class="logo">
+					<img src="assets/img/logoMFC2.png" width="50" alt="navbar brand" class="navbar-brand">
+					<span class="user">МФЦ-ИНВЕНТ</span>
+				</a>
+				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon">
+						<i class="icon-menu"></i>
+					</span>
+				</button>
+				<button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
+				<div class="nav-toggle">
+					<button class="btn btn-toggle toggle-sidebar">
+						<i class="icon-menu"></i>
+					</button>
+				</div>
+			</div>
+			<!-- End Logo Header -->
+			<!-- Navbar Header -->
+			<nav class="navbar navbar-header navbar-expand-lg" data-background-color="white">
+
+				<div class="container-fluid">
+					<div class="collapse" id="search-nav">
+						<form class="navbar-left navbar-form nav-search mr-md-3">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<button type="submit" class="btn btn-search pr-1">
+										<i class="fa fa-search search-icon"></i>
+									</button>
+								</div>
+								<input type="text" placeholder="Search ..." class="form-control">
+							</div>
+						</form>
+					</div>
+					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+						<li class="nav-item toggle-nav-search hidden-caret">
+							<a class="nav-link" data-toggle="collapse" href="#search-nav" role="button" aria-expanded="false" aria-controls="search-nav">
+								<i class="fa fa-search"></i>
+							</a>
+						</li>
+						<li class="nav-item dropdown hidden-caret">
+							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
+								<div class="avatar-sm">
+									@if (Model != null && Model.profiles.Count > 0)
+									{
+										var profile = Model.profiles[0]; // Assuming you're displaying the image for the first user in the list
+										if (profile.ImageData != null && profile.ImageData.Length > 0)
+										{
+											var base64Image = Convert.ToBase64String(profile.ImageData);
+											<img src="data:image/png;base64, @base64Image" alt="..." class="avatar-img rounded-circle">
+
+										}
+										else
+										{
+											<img src="assets/img/orel-avatar.jpg" alt="..." class="avatar-img rounded-circle">
+										}
+									}
+									else
+									{
+										<img src="assets/img/orel-avatar.jpg" alt="..." class="avatar-img rounded-circle">
+
+									}
+									@* <img src="assets/img/orel-avatar.jpg" alt="..." class="avatar-img rounded-circle"> *@
+								</div>
+							</a>
+							<ul class="dropdown-menu dropdown-user animated fadeIn">
+								<div class="dropdown-user-scroll scrollbar-outer">
+								<li>
+									<div class="user-box">
+
+										<div class="avatar-lg">
+												@if (Model != null && Model.profiles.Count > 0)
+												{
+													var profile = Model.profiles[0]; // Assuming you're displaying the image for the first user in the list
+													if (profile.ImageData != null && profile.ImageData.Length > 0)
+													{
+														var base64Image = Convert.ToBase64String(profile.ImageData);
+													<img src="data:image/png;base64, @base64Image" alt="image profile" class="avatar-img rounded">
+
+													}
+													else
+													{
+													<img src="assets/img/orel-avatar.jpg" alt="image profile" class="avatar-img rounded">
+													}
+												}
+												else
+												{
+												<img src="assets/img/orel-avatar.jpg" alt="image profile" class="avatar-img rounded">
+
+												}@* <img src="assets/img/orel-avatar.jpg" alt="image profile" class="avatar-img rounded"> *@
+										</div>
+										<div class="u-text">
+											<h4>@Model.FirstName</h4>
+											<p class="text-muted">@Model.Email</p><a href="profile" class="btn btn-xs btn-secondary btn-sm">Отркыть профиль</a>
+										</div>
+									</div>
+								</li>
+								<li>
+									
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="login">Выйти</a>
+								</li>
+				</div>
+				</ul>
+				</li>
+				</ul>
+		</div>
+		</nav>
+		<!-- End Navbar -->
+	</div>
+
+	<!-- Sidebar -->
+	<div class="sidebar sidebar-style-2" data-background-color="white">
+		<div class="sidebar-wrapper scrollbar scrollbar-inner">
+			<div class="sidebar-content">
+				<div class="user">
+					<div class="avatar-sm float-left mr-2">
+							@if (Model != null && Model.profiles.Count > 0)
+							{
+								var profile = Model.profiles[0]; // Assuming you're displaying the image for the first user in the list
+								if (profile.ImageData != null && profile.ImageData.Length > 0)
+								{
+									var base64Image = Convert.ToBase64String(profile.ImageData);
+								<img src="data:image/png;base64, @base64Image" alt="..." class="avatar-img rounded-circle">
+
+								}
+								else
+								{
+								<img src="assets/img/orel-avatar.jpg" alt="..." class="avatar-img rounded-circle">
+								}
+							}
+							else
+							{
+							<img src="assets/img/orel-avatar.jpg" alt="..." class="avatar-img rounded-circle">
+
+							}
+							@* 	<img src="assets/img/orel-avatar.jpg" alt="..." class="avatar-img rounded-circle"> *@
+
+					</div>
+					<div class="info">
+						<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+
+							<span>
+									@Model.FirstName
+								<span class="user-level">@Model.UserRole</span>
+								<span class="caret"></span>
+							</span>
+
+
+						</a>
+						<div class="clearfix"></div>
+
+						<div class="collapse in" id="collapseExample">
+							@* <ul class="nav">
+								<li>
+									<a href="profile">
+										<span class="link-collapse">Мой профиль</span>
+									</a>
+								</li>
+								<li>
+									<a href="profileEdit">
+										<span class="link-collapse">Изменить профиль</span>
+									</a>
+								</li>
+								<li>
+									<a href="#settings">
+										<span class="link-collapse">Настройки</span>
+									</a>
+								</li>
+							</ul> *@
+						</div>
+					</div>
+				</div>
+				<ul class="nav nav-primary">
+					<li class="nav-item active">
+						<a data-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+							<i class="fas fa-home"></i>
+							<p>Панель</p>
+							<span class="caret"></span>
+						</a>
+						<div class="collapse" id="dashboard">
+							<ul class="nav nav-collapse">
+								<li>
+									<a href="index">
+										<span class="sub-item">Оборудование</span>
+									</a>
+								</li>
+								<li>
+									<a href="user">
+										<span class="sub-item">Пользователи</span>
+									</a>
+								</li>
+								<li>
+									<a href="history">
+										<span class="sub-item">История</span>
+									</a>
+								</li>
+								<li>
+									<a href="filials">
+										<span class="sub-item">Филиалы</span>
+									</a>
+								</li>
+								<li>
+									<a href="inventory">
+										<span class="sub-item">Инвентаризация</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li class="nav-section">
+						<span class="sidebar-mini-icon">
+							<i class="fa fa-ellipsis-h"></i>
+						</span>
+						<!--<h4 class="text-section">Components</h4>-->
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- End Sidebar -->
+
+	<div class="main-panel">
+		<div class="content">
+			<div class="page-inner">
+				<div class="col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<div class="d-flex align-items-center">
+								<h4 class="card-title">Оборудование</h4>
+									@if (@Model.UserRole == "Администратор")
+									{
+									<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+										<i class="fa fa-plus"></i>
+										Добавить
+									</button>
+									}
+							</div>
+						</div>
+						<div class="card-body">
+							<!-- Modal -->
+							<div class="modal fade" id="addRowModal" tabindex="-1" role="dialog" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<form method="POST" asp-page-handler="Add">
+											<div class="modal-header no-bd">
+												<h5 class="modal-title">
+													<span class="fw-mediumbold">
+														Новая
+													</span>
+													<span class="fw-light">
+														Запись
+													</span>
+												</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+
+											<div class="modal-body">
+												<p class="small">Создайте новую строку, используя эту форму. Обязательно заполните их все.</p>
+
+												<div class="row">
+													<div class="col-sm-12">
+														<div class="form-group form-group-default">
+															<label>Наименование</label>
+															<input name="name" id="addName" type="text" class="form-control" placeholder="введите имя">
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="form-group form-group-default">
+															<label>Выберете тип оборудования</label>
+															<select name="type" class="form-control" id="addTypeObject">
+																<option>Моноблоки</option>
+																<option>Маршрутизаторы</option>
+																<option>Комутаторы</option>
+																<option>МФУ</option>
+																<option>Неттопы</option>
+															</select>
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="form-group form-group-default">
+															<label>Инвентарный номер</label>
+															<input name="invnum" id="addNumberInventory" type="text" class="form-control" placeholder="введите номер">
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="form-group form-group-default">
+															<label>МОЛ</label>
+															<select name="mol" class="form-control" id="addMOL">
+																	@{
+																		foreach (var users in Model.users)
+																		{
+																		<option value="@users.FIO">@users.FIO</option>
+																		}
+																	}
+															</select>
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="form-group form-group-default">
+															<label>Филиал</label>
+															<select name="filial" class="form-control" id="addOffice">
+																	@{
+																		foreach (var filial in Model.filials)
+																		{
+																		<option value="@filial.Name">@filial.Name</option>
+																		}
+																	}
+															</select>
+														</div>
+													</div>
+													<div class="col-6">
+														<div class="form-group form-group-default">
+															<label>Дата заведения</label>
+															<input name="date" id="addDateCalendar" type="date" class="form-control">
+														</div>
+													</div>
+													<div class="col-6">
+														<div class="form-group form-group-default">
+															<label>Цена</label>
+															<input name="price" id="addCost" type="text" class="form-control" placeholder="введите стоимость">
+														</div>
+													</div>
+												</div>
+
+											</div>
+											<div class="modal-footer no-bd">
+												<button type="submit" id="addRowButton" class="btn btn-primary">Добавить</button>
+												<button type="button" class="btn btn-danger" data-dismiss="modal">Закрыть</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+
+							<div class="table-responsive">
+
+								<table id="add-row" class="display table table-striped table-hover">
+									<thead>
+										<tr>
+											<th>#</th>
+											<th>Наименование</th>
+											<th>Инвентарный номер</th>
+											<th>МОЛ</th>
+											<th style="width: 10%">Действие</th>
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th>#</th>
+											<th>Наименование</th>
+											<th>Инвентарный номер</th>
+											<th>МОЛ</th>
+											<th>Действие</th>
+										</tr>
+									</tfoot>
+									<tbody>
+
+
+
+											@{
+												if (Model != null)
+												{
+													foreach (var equipment in Model.equipment)
+													{
+													<tr>
+														<td>
+															<div class="form-check">
+																<label class="form-check-label">
+																	<input class="form-check-input" type="checkbox" value="">
+																	<span class="form-check-sign"></span>
+																</label>
+															</div>
+														</td>
+														<td>@equipment.name</td>
+														<td>@equipment.invnum</td>
+														<td>@equipment.mol</td>
+														<td>
+															<div class="form-button-action">
+
+
+																<!-- ПЕРЕМЕЩЕНИЕ -->
+
+																<button type="button" title="" class="btn btn-link btn-moving btn-lg"
+																		data-toggle="tooltip"
+																		data-target="#MovingRowModal"
+																		data-equipmentid="@equipment.Id"
+																		data-name="@equipment.name"
+																		data-invnum="@equipment.invnum"
+																		data-mol="@equipment.mol"
+																		data-type="@equipment.type"
+																		data-filial="@equipment.filial"
+																		data-date="@equipment.date"
+																		data-price="@equipment.price"
+																		data-original-title="Переместить">
+
+
+																	<i class="fas fa-map-signs"></i>
+																</button>
+
+																<div class="modal fade" id="MovingRowModal" tabindex="-1" role="dialog" aria-hidden="true">
+																	<div class="modal-dialog" role="document">
+																		<div class="modal-content">
+																			<form method="POST" asp-page-handler="Moving">
+																				<div class="modal-header no-bd">
+																					<h5 class="modal-title">
+																						<span class="fw-mediumbold">
+																							Переместить
+																						</span>
+																						<span class="fw-light">
+																							Оборудование
+																						</span>
+																					</h5>
+																					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																						<span aria-hidden="true">&times;</span>
+																					</button>
+																				</div>
+
+																				<div class="modal-body">
+																					<p class="small">Переместить оборудование на другое МОЛ:</p>
+
+
+																					<div class="row">
+																						<div class="col-sm-12">
+																							<div class="form-group form-group-default">
+																								<label>Наименование</label>
+																								<input name="name" id="movname" type="text" style="border: none" readonly>
+																							</div>
+																						</div>
+																						<div class="col-sm-12">
+																							<div class="form-group form-group-default">
+																								<label>Выберете тип оборудования</label>
+																								<input name="type" id="movtype" type="text" style="border: none" readonly>
+
+																							</div>
+																						</div>
+																						<div class="col-sm-12">
+																							<div class="form-group form-group-default">
+																								<label>Инвентарный номер</label>
+
+																								<input name="invnum" id="movinvnum" type="text" style="border: none" readonly>
+																							</div>
+																						</div>
+																						<div class="col-sm-12" style="display: none">
+																							<div class="form-group form-group-default">
+																								<label>МОЛ</label>
+																								<select name="mol" class="form-control" id="movmol">
+																										@{
+																											foreach (var users in Model.users)
+																											{
+																											<option value="@users.FIO">@users.FIO</option>
+																											}
+																										}
+																								</select>
+																							</div>
+																						</div>
+																						<div class="col-sm-12">
+																							<div class="form-group form-group-default">
+																								<label>МОЛ</label>
+																								<select name="mol1" class="form-control" id="movmol">
+																										@{
+																											foreach (var users in Model.users)
+																											{
+																											<option value="@users.FIO">@users.FIO</option>
+																											}
+																										}
+																								</select>
+																							</div>
+																						</div>
+																						<div class="col-sm-12">
+																							<div class="form-group form-group-default">
+																								<label>Филиал</label>
+																								<select name="filial" class="form-control" id="movfilial">
+																										@{
+																											foreach (var filial in Model.filials)
+																											{
+																											<option value="@filial.Name">@filial.Name</option>
+																											}
+																										}
+																								</select>
+																							</div>
+																						</div>
+																						<div class="col-6">
+																							<div class="form-group form-group-default">
+																								<label>Дата заведения</label>
+																								<input name="date" id="movdate" type="text" style="border: none" readonly>
+
+
+																							</div>
+																						</div>
+																						<div class="col-6">
+																							<div class="form-group form-group-default">
+																								<label>Цена</label>
+																								<input name="price" id="movprice" type="text" style="border: none" readonly>
+
+																							</div>
+																						</div>
+																						<input type="hidden" name="id" id="movingequipmentid" />
+
+																					</div>
+
+
+																					<div class="modal-footer no-bd">
+																						<button type="submit" class="btn btn-primary" id="btnSaveMoving">Сделать перемещение</button>
+																						<button type="button" class="btn btn-danger" data-dismiss="modal">Закрыть</button>
+																					</div>
+
+																				</div>
+																			</form>
+																		</div>
+																	</div>
+																</div>
+
+																<!-- EDN ПЕРЕМЕЩЕНИЕ -->
+																<!-- ИЗМЕНЕНИЕ -->
+																	@if (@Model.UserRole == "Администратор")
+																	{
+																	<button type="button" class="btn btn-link btn-primary btn-lg btn-edit"
+																			data-toggle="tooltip"
+																			data-target="#editRowModal"
+																			data-equipmentid="@equipment.Id"
+																			data-name="@equipment.name"
+																			data-invnum="@equipment.invnum"
+																			data-mol="@equipment.mol"
+																			data-type="@equipment.type"
+																			data-filial="@equipment.filial"
+																			data-date="@equipment.date"
+																			data-price="@equipment.price"
+																			data-original-title="Изменить">
+
+																		<i class="fa fa-edit"></i>
+																	</button>
+																	}
+
+
+
+
+																<div class="modal fade" id="editRowModal" tabindex="-1" role="dialog" aria-hidden="true">
+																	<div class="modal-dialog" role="document">
+																		<div class="modal-content">
+																			<form method="POST" asp-page-handler="Edit">
+																				<div class="modal-header no-bd">
+																					<h5 class="modal-title">
+																						<span class="fw-mediumbold">
+																							Изменить
+																						</span>
+																						<span class="fw-light">
+																							Запись
+																						</span>
+																					</h5>
+																					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																						<span aria-hidden="true">&times;</span>
+																					</button>
+																				</div>
+
+																				<div class="modal-body">
+																					<p class="small">Измените данные в форме ниже:</p>
+
+
+																					<div class="row">
+																						<div class="col-sm-12">
+																							<div class="form-group form-group-default">
+																								<label>Наименование</label>
+																								<input name="name" id="editname" type="text" class="form-control" placeholder="введите имя">
+																							</div>
+																						</div>
+																						<div class="col-sm-12">
+																							<div class="form-group form-group-default">
+																								<label>Выберете тип оборудования</label>
+																								<select name="type" class="form-control" id="edittype">
+																									<option>Моноблоки</option>
+																									<option>Маршрутизаторы</option>
+																									<option>Комутаторы</option>
+																									<option>МФУ</option>
+																									<option>Неттопы</option>
+																								</select>
+																							</div>
+																						</div>
+																						<div class="col-sm-12">
+																							<div class="form-group form-group-default">
+																								<label>Инвентарный номер</label>
+																								<input name="invnum" id="editinvnum" type="text" class="form-control" placeholder="введите номер">
+																							</div>
+																						</div>
+																						<div class="col-sm-12">
+																							<div class="form-group form-group-default">
+																								<label>МОЛ</label>
+																								<select name="mol" class="form-control" id="editmol">
+																										@{
+																											foreach (var users in Model.users)
+																											{
+																											<option value="@users.FIO">@users.FIO</option>
+																											}
+																										}
+																								</select>
+																							</div>
+																						</div>
+																						<div class="col-sm-12">
+																							<div class="form-group form-group-default">
+																								<label>Филиал</label>
+																								<select name="filial" class="form-control" id="editfilial">
+																										@{
+																											foreach (var filial in Model.filials)
+																											{
+																											<option value="@filial.Name">@filial.Name</option>
+																											}
+																										}
+																								</select>
+																							</div>
+																						</div>
+																						<div class="col-6">
+																							<div class="form-group form-group-default">
+																								<label>Дата заведения</label>
+																								<input name="date" id="editdate" type="date" class="form-control">
+																							</div>
+																						</div>
+																						<div class="col-6">
+																							<div class="form-group form-group-default">
+																								<label>Цена</label>
+																								<input name="price" id="editprice" type="text" class="form-control" placeholder="введите стоимость">
+																							</div>
+																						</div>
+																						<input type="hidden" name="id" id="editequipmentid" />
+																					</div>
+
+
+																					<div class="modal-footer no-bd">
+																						<button type="submit" class="btn btn-primary" id="btnSaveEdit">Сохранить изменения</button>
+																						<button type="button" class="btn btn-danger" data-dismiss="modal">Закрыть</button>
+																					</div>
+
+																				</div>
+																			</form>
+																		</div>
+																	</div>
+																</div>
+
+																<!--END ИЗМЕНЕНИЕ -->
+																	@if (@Model.UserRole == "Администратор")
+																	{
+																	<form method="POST" asp-page-handler="Delete" onsubmit="return confirm('Вы уверены, что хотите удалить этого пользователя?');">
+																		<input type="hidden" name="iD" value="@equipment.Id" />
+																		<button type="submit" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Удалить">
+																			<i class="fa fa-times" style="padding-top: 7px"></i>
+																		</button>
+																	</form>
+
+
+
+																	<button type="button" title="" data-original-title="Показать QR Code" class="btn btn-link btn-lg" onclick="showQRCode(this)" data-toggle="tooltip" data-target="#QRCodeModal" data-equipmentid="@equipment.Id" data-name="@equipment.name" data-invnum="@equipment.invnum">
+																		<i class="fas fa-qrcode"></i>
+																	</button>
+
+
+
+																	<div class="modal fade" id="QRCodeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+																		<div class="modal-dialog modal-dialog-centered" role="document">
+
+																			<div class="modal-content" style="height: 350px">
+																				<div class="modal-header">
+																					<h5 class="modal-title" id="exampleModalLabel">QR Code</h5>
+																					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																						<span aria-hidden="true">&times;</span>
+																					</button>
+																				</div>
+																				<div class="modal-body">
+																					<!-- Здесь будет отображаться QR-код -->
+																					<div id="qrcodeModal" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+																				</div>
+																				<div class="modal-footer">
+																					<button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+
+																	}
+															</div>
+														</td>
+													</tr>
+													}
+												}
+											}
+
+
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="footer">
+			<div class="container-fluid">
+				<nav class="pull-left">
+					<ul class="nav">
+						<li class="nav-item">
+							<a class="nav-link" href="https://mfc.permkrai.ru/">
+								МФЦ Пермь
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="http://172.29.15.15/index.php">
+								Тел. Справочник
+							</a>
+						</li>
+					</ul>
+				</nav>
+				<div class="copyright ml-auto">
+					Сделано с <i class="fa fa-heart heart text-danger"></i> от <a href="https://mfc.permkrai.ru/">МФЦ</a>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+	<!-- Custom template | don't include it in your project!
+	<div class="custom-template">
+		<div class="title">Settings</div>
+		<div class="custom-content">
+			<div class="switcher">
+				<div class="switch-block">
+					<h4>Logo Header</h4>
+					<div class="btnSwitch">
+						<button type="button" class="changeLogoHeaderColor" data-color="dark"></button>
+						<button type="button" class="changeLogoHeaderColor" data-color="blue"></button>
+						<button type="button" class="changeLogoHeaderColor" data-color="purple"></button>
+						<button type="button" class="changeLogoHeaderColor" data-color="light-blue"></button>
+						<button type="button" class="changeLogoHeaderColor" data-color="green"></button>
+						<button type="button" class="changeLogoHeaderColor" data-color="orange"></button>
+						<button type="button" class="changeLogoHeaderColor" data-color="red"></button>
+						<button type="button" class="changeLogoHeaderColor" data-color="white"></button>
+						<br/>
+						<button type="button" class="selected changeLogoHeaderColor" data-color="dark2"></button>
+						<button type="button" class="changeLogoHeaderColor" data-color="blue2"></button>
+						<button type="button" class="changeLogoHeaderColor" data-color="purple2"></button>
+						<button type="button" class="changeLogoHeaderColor" data-color="light-blue2"></button>
+						<button type="button" class="changeLogoHeaderColor" data-color="green2"></button>
+						<button type="button" class="changeLogoHeaderColor" data-color="orange2"></button>
+						<button type="button" class="changeLogoHeaderColor" data-color="red2"></button>
+					</div>
+				</div>
+				<div class="switch-block">
+					<h4>Navbar Header</h4>
+					<div class="btnSwitch">
+						<button type="button" class="selected changeTopBarColor" data-color="dark"></button>
+						<button type="button" class="changeTopBarColor" data-color="blue"></button>
+						<button type="button" class="changeTopBarColor" data-color="purple"></button>
+						<button type="button" class="changeTopBarColor" data-color="light-blue"></button>
+						<button type="button" class="changeTopBarColor" data-color="green"></button>
+						<button type="button" class="changeTopBarColor" data-color="orange"></button>
+						<button type="button" class="changeTopBarColor" data-color="red"></button>
+						<button type="button" class="changeTopBarColor" data-color="white"></button>
+						<br/>
+						<button type="button" class="changeTopBarColor" data-color="dark2"></button>
+						<button type="button" class="changeTopBarColor" data-color="blue2"></button>
+						<button type="button" class="changeTopBarColor" data-color="purple2"></button>
+						<button type="button" class="changeTopBarColor" data-color="light-blue2"></button>
+						<button type="button" class="changeTopBarColor" data-color="green2"></button>
+						<button type="button" class="changeTopBarColor" data-color="orange2"></button>
+						<button type="button" class="changeTopBarColor" data-color="red2"></button>
+					</div>
+				</div>
+				<div class="switch-block">
+					<h4>Sidebar</h4>
+					<div class="btnSwitch">
+						<button type="button" class="changeSideBarColor" data-color="white"></button>
+						<button type="button" class="changeSideBarColor" data-color="dark"></button>
+						<button type="button" class="selected changeSideBarColor" data-color="dark2"></button>
+					</div>
+				</div>
+				<div class="switch-block">
+					<h4>Background</h4>
+					<div class="btnSwitch">
+						<button type="button" class="changeBackgroundColor" data-color="bg2"></button>
+						<button type="button" class="changeBackgroundColor selected" data-color="bg1"></button>
+						<button type="button" class="changeBackgroundColor" data-color="bg3"></button>
+						<button type="button" class="selected changeBackgroundColor" data-color="dark"></button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="custom-toggle">
+			<i class="flaticon-settings"></i>
+		</div>
+	</div> -->
+	<!-- End Custom template -->
+	</div>
+	<!--   Core JS Files   -->
+	<script src="assets/js/core/jquery.3.2.1.min.js"></script>
+	<script src="assets/js/core/popper.min.js"></script>
+	<script src="assets/js/core/bootstrap.min.js"></script>
+
+	<!-- jQuery UI -->
+	<script src="assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+	<script src="assets/js/plugin/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+
+	<!-- jQuery Scrollbar -->
+	<script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+
+	<!-- Chart JS -->
+	<script src="assets/js/plugin/chart.js/chart.min.js"></script>
+
+	<!-- jQuery Sparkline -->
+	<script src="assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+
+	<!-- Chart Circle -->
+	<script src="assets/js/plugin/chart-circle/circles.min.js"></script>
+
+	<!-- Datatables -->
+	<script src="assets/js/plugin/datatables/datatables.min.js"></script>
+
+	<!-- Bootstrap Notify -->
+	<script src="assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+	<!-- jQuery Vector Maps -->
+	<script src="assets/js/plugin/jqvmap/jquery.vmap.min.js"></script>
+	<script src="assets/js/plugin/jqvmap/maps/jquery.vmap.world.js"></script>
+
+	<!-- Sweet Alert -->
+	<script src="assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+	<!-- Atlantis JS -->
+	<script src="assets/js/atlantis.min.js"></script>
+
+	<!-- Atlantis DEMO methods, don't include it in your project! -->
+	<script src="assets/js/setting-demo.js"></script>
+	<script src="assets/js/demo.js"></script>
+	<script>
+		$('#lineChart').sparkline([102, 109, 120, 99, 110, 105, 115], {
+			type: 'line',
+			height: '70',
+			width: '100%',
+			lineWidth: '2',
+			lineColor: 'rgba(255, 255, 255, .5)',
+			fillColor: 'rgba(255, 255, 255, .15)'
+		});
+
+		$('#lineChart2').sparkline([99, 125, 122, 105, 110, 124, 115], {
+			type: 'line',
+			height: '70',
+			width: '100%',
+			lineWidth: '2',
+			lineColor: 'rgba(255, 255, 255, .5)',
+			fillColor: 'rgba(255, 255, 255, .15)'
+		});
+
+		$('#lineChart3').sparkline([105, 103, 123, 100, 95, 105, 115], {
+			type: 'line',
+			height: '70',
+			width: '100%',
+			lineWidth: '2',
+			lineColor: 'rgba(255, 255, 255, .5)',
+			fillColor: 'rgba(255, 255, 255, .15)'
+		});
+	</script>
+	<script>
+		$(document).ready(function () {
+			$('#basic-datatables').DataTable({
+			});
+
+			$('#multi-filter-select').DataTable({
+				"pageLength": 5,
+				initComplete: function () {
+					this.api().columns().every(function () {
+						var column = this;
+						var select = $('<select class="form-control"><option value=""></option></select>')
+							.appendTo($(column.footer()).empty())
+							.on('change', function () {
+								var val = $.fn.dataTable.util.escapeRegex(
+									$(this).val()
+								);
+
+								column
+									.search(val ? '^' + val + '$' : '', true, false)
+									.draw();
+							});
+
+						column.data().unique().sort().each(function (d, j) {
+							select.append('<option value="' + d + '">' + d + '</option>')
+						});
+					});
+				}
+			});
+
+			// Add Row
+			$('#add-row').DataTable({
+				"pageLength": 5,
+			});
+
+			var action = '<td><div class="form-button-action"><button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-moving btn-lg" data-original-title="Переместить"><i class="fas fa-map-signs"></i></button><button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Изменить"><i class="fa fa-edit"></i></button><button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title=""><i class="fa fa-times"></i></button><button type="button" data-original-title="Удалить" title="" class="btn btn-link btn-lg" onclick="showQRCode(this)" data-toggle="tooltip"><i class="fas fa-qrcode"></i></button></div></td>';
+			var actionChekBox = '<td> <div class="form-check"> <label class="form-check-label"> <input class="form-check-input" type="checkbox" value=""> <span class="form-check-sign"></span> </label> </div> </td>';
+			$('#addRowButton').click(function () {
+				$('#add-row').dataTable().fnAddData([
+					actionChekBox,
+					$("#addName").val(),
+					$("#addNumberInventory").val(),
+					$("#addMOL").val(),
+					action
+				]);
+				$('#addRowModal').modal('hide');
+
+			});
+		});
+	</script>
+	<script>
+		$(document).ready(function () {
+			$('#add-row').DataTable();
+
+			$('#add-row').on('click', '.btn-edit', function () {
+				var equipmentid = $(this).data('equipmentid');
+				var name = $(this).data('name');
+				var invnum = $(this).data('invnum');
+				var mol = $(this).data('mol');
+				var type = $(this).data('type');
+				var filial = $(this).data('filial');
+				var date = $(this).data('date');
+				var price = $(this).data('price');
+
+				$('#editequipmentid').val(equipmentid);
+				$('#editname').val(name);
+				$('#editinvnum').val(invnum);
+				$('#editmol').val(mol);
+				$('#edittype').val(type);
+				$('#editfilial').val(filial);
+				$('#editdate').val(date);
+				$('#editprice').val(price);
+
+
+				$('#editRowModal').modal('show');
+			});
+
+			$('#add-row').on('click', '.btn-moving', function () {
+				var equipmentid = $(this).data('equipmentid');
+				var name = $(this).data('name');
+				var invnum = $(this).data('invnum');
+				var mol = $(this).data('mol');
+				var type = $(this).data('type');
+				var filial = $(this).data('filial');
+				var date = $(this).data('date');
+				var price = $(this).data('price');
+
+				$('#movingequipmentid').val(equipmentid);
+				$('#movname').val(name);
+				$('#movinvnum').val(invnum);
+				$('#movmol').val(mol);
+				$('#movtype').val(type);
+				$('#movfilial').val(filial);
+				$('#movdate').val(date);
+				$('#movprice').val(price);
+
+
+				$('#MovingRowModal').modal('show');
+			});
+
+
+			$('#btnSaveEdit').click(function () {
+				var equipmentid = $('#editequipmentid').val();
+				var name = $('#editname').val();
+				var invnum = $('#editinvnum').val();
+				var mol = $('#editmol').val();
+				var type = $('#edittype').val();
+				var filial = $('#editfilial').val();
+				var date = $('#editdate').val();
+				var price = $('#editprice').val();
+
+
+
+				$.ajax({
+					url: '/Index',
+					type: 'POST',
+					data: {
+						Id: equipmentid,
+						name: name,
+						invnum: invnum,
+						mol: mol,
+						type: type,
+						filial: filial,
+						date: date,
+						price: price
+
+					},
+					success: function (response) {
+
+						location.reload();
+					},
+					error: function (error) {
+						console.error('Error:', error);
+					}
+				});
+
+				$('#editRowModal').modal('hide');
+				$('#MovingRowModal').modal('hide');
+			});
+			$('#btnSaveMoving').click(function () {
+				var equipmentid = $('#movingequipmentid').val();
+				var name = $('#movname').val();
+				var invnum = $('#movinvnum').val();
+				var mol = $('#movmol').val();
+				var type = $('#movtype').val();
+				var filial = $('#movfilial').val();
+				var date = $('#movdate').val();
+				var price = $('#movprice').val();
+
+
+
+				$.ajax({
+					url: '/Index',
+					type: 'POST',
+					data: {
+						Id: equipmentid,
+						name: name,
+						invnum: invnum,
+						mol: mol,
+						type: type,
+						filial: filial,
+						date: date,
+						price: price
+
+					},
+					success: function (response) {
+
+						location.reload();
+					},
+					error: function (error) {
+						console.error('Error:', error);
+					}
+				});
+
+				$('#editRowModal').modal('hide');
+				$('#MovingRowModal').modal('hide');
+			});
+		});
+
+
+	</script>
+
+
+	<script type="text/javascript">
+		function showQRCode(button) {
+			$('#qrcodeModal').empty();  // Очищаем предыдущий QR-код
+
+			var equipmentId = $(button).data('equipmentid');
+			var name = $(button).data('name');
+			var invnum = $(button).data('invnum');
+
+			var text = "ID: " + equipmentId + "\n" +
+				"Наименование: " + name + "\n" +
+				"Инвентарный номер: " + invnum;
+
+			var qrcode = new QRCode(document.getElementById("qrcodeModal"), {
+				width: 200,
+				height: 200
+			});
+			qrcode.makeCode(text);
+
+			$('#QRCodeModal').modal('show');
+		}
+	</script>
+
+
+
+</body>
+@if (!string.IsNullOrEmpty(TempData["ErrorMessage"]?.ToString()))
+{
+
+	<script>
+		alert('@Html.Raw(TempData["ErrorMessage"])');
+	</script>
+
+
+
+}
+</html>

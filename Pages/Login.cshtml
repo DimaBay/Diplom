@@ -1,0 +1,64 @@
+﻿@page
+@using Microsoft.JSInterop;
+@using MySql.Data.MySqlClient;
+@using inventory
+@using inventory.Models
+@inject IJSRuntime JSRuntime
+@model inventory.Pages.LoginModel
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="assets/css/Login.css">
+</head>
+<body>
+  
+
+    <img class="bg-image"  />
+    <div class="frame-container">
+        <form method="post">
+        <div class="frame-frame">
+            <div class="SignInText">Вход</div>
+            <div class="UsernameText">Логин</div>
+            <div class="text-field__icon text-field__icon_login">
+                <input name="Login" class="text-field__input" type="text">
+            </div>
+            <div class="PasswordText">Пароль</div>
+            <div class="text-field__icon text-field__icon_pwd">
+                <input name="Password" class="text-field__input" type="password"> 
+            </div>
+            <div class="KeepLoggedInT">
+                <input type="checkbox" class="checkbox-round" id="scales" name="scales" />
+                <label for="scales">Запомнить меня</label>
+            </div>
+            <a href="index" class="HrefLogin">
+                <button class="buttonLogIn" onclick="return authenticateUser()"><span>ВОЙТИ</span></button>
+            </a>
+         
+        </div>
+        </form>
+    </div>
+    
+
+
+    <!-- Add this to _Layout.cshtml or a shared script file -->
+    <script src="_content/Microsoft.AspNetCore.Components.Web.Extensions/script.js"></script>
+
+</body>
+@if (!string.IsNullOrEmpty(TempData["ErrorMessage"]?.ToString()))
+{
+    
+        <script>
+        alert('@Html.Raw(TempData["ErrorMessage"])');
+        </script>
+           
+        
+    
+}
+
+</html>
+

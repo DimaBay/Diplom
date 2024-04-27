@@ -1,83 +1,83 @@
 ﻿using inventory.Models;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using MySql.Data.MySqlClient;
+using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
+using inventory.Interfaces;
+using Org.BouncyCastle.Utilities;
+using inventory.ViewModel;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace inventory.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-        public IActionResult Login()
-        {
-            return View();
-        }
-       
+		private IUsers IAllUsers;
+		private IEquipment IAllEquipment;
+		private IFilial IAllFilial;
+		VMUsers vmusers = new VMUsers();
+		VMEquipment vmequipment = new VMEquipment();
 
+		private readonly Microsoft.AspNetCore.Hosting.IHostingEnvironment hostingEnvironment;
+		/*private readonly ILogger<HomeController> _logger;*/
 
+		public HomeController(IUsers iAllUsers, IEquipment iAllEquipment, IFilial iAllFilial, /*ILogger<HomeController> logger*/ Microsoft.AspNetCore.Hosting.IHostingEnvironment environment)
+        {
+            IAllUsers = iAllUsers;
+			IAllEquipment = iAllEquipment;
+			IAllFilial = iAllFilial;
+			hostingEnvironment = environment;
+			/*_logger = logger;*/
 
-        public IActionResult Equipment()
-        {
-            return View();
-        }
-        public IActionResult EditTypeEquipment()
-        {
-            return View();
-        }
-        public IActionResult EditEquipment()
-        {
-            return View();
-        }
-        public IActionResult ChangePoliz()
-        {
-            return View();
-        }
-        public IActionResult ChangePassword()
-        {
-            return View();
-        }
-        public IActionResult AddTypeEquipment()
-        {
-            return View();
+		}
+		public ViewResult user()
+		{
+			
 
-        }
-        public IActionResult AddEquipment()
-        {
-            return View();
+			vmusers.Users = IAllUsers.AllUsers;
+			vmusers.Equipment = IAllEquipment.AllEquipment;
+			vmusers.Filial = IAllFilial.AllFilial;
 
-        }
-        public IActionResult AddHistory()
-        {
-            return View();
+			return View(vmusers);
+		}
+		[HttpGet]
+		public ViewResult Add()
+		{
+			
+			IEnumerable<Users> users = IAllUsers.AllUsers;
 
-        }
-        public IActionResult AddPoliz()
-        {
-            return View();
+			return View(users);
+		}
+		[HttpPost]
+		public RedirectResult Add(string FIO, string Filial, string Email)
+		{
+		
 
-        }
-        public IActionResult MainPage()
-        {
+			Users newUsers = new Users();
+			newUsers.FIO = FIO;
+			newUsers.Filial = Filial;
+			newUsers.Email = Email;
 
-            return View();
+			int id = IAllUsers.Add(newUsers);
 
-        }
-        public IActionResult PersonalAccount()
-        {
-            return View();
+			return Redirect("/user");
 
-        }
+		}
 
 
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-    }
+
+
+
+
+
+
+		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+		public IActionResult Error()
+		{
+			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+		}
+	}
 }
