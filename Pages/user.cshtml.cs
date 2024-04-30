@@ -3,6 +3,7 @@ using inventory.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace inventory.Pages
 {
@@ -40,10 +41,27 @@ namespace inventory.Pages
 
 
 			
-				newUser.FIO = Request.Form["FIO"];
+				/*newUser.FIO = Request.Form["FIO"];
 				newUser.Email = Request.Form["Email"];
-				newUser.Filial = Request.Form["Filial"];
-				bUsers.Add(newUser);
+				newUser.Filial = Request.Form["Filial"];*/
+
+			
+
+			newUser.LastName = Request.Form["LastName"];
+			newUser.FirstName = Request.Form["FirstName"];
+			newUser.Patronymic = Request.Form["Patronymic"];
+			newUser.Branch = Request.Form["Branch"];
+			newUser.Email = Request.Form["Email"];
+			newUser.PhoneNumber = Request.Form["PhoneNumber"];
+			newUser.Login = Request.Form["Login"];
+			newUser.Password = Request.Form["Password"];
+			newUser.Role = Request.Form["Role"];
+
+
+
+
+
+			bUsers.Add(newUser);
 				filials = bFilial.AllFilial.ToList();
 				users = bUsers.AllUsers.ToList();
 
@@ -71,16 +89,38 @@ namespace inventory.Pages
 
 
 			int userId = int.Parse(Request.Form["id"]);
-			string newFIO = Request.Form["FIO"];
+			string newLastName = Request.Form["LastName"];
+			string newFirstName = Request.Form["FirstName"];
+			string newPatronymic = Request.Form["Patronymic"];
+
+			string newBranch = Request.Form["Branch"];
 			string newEmail = Request.Form["Email"];
-			string newFilial = Request.Form["Filial"];
+			string newPhoneNumber = Request.Form["PhoneNumber"];
+			string newLogin = Request.Form["Login"];
+			string newPassword = Request.Form["Password"];
+			string newRole = Request.Form["Role"];
+			
+
+
 
 			Users userToUpdate = new Users()
 			{
 				id = userId,
-				FIO = newFIO,
+				LastName = newLastName,
+				FirstName = newFirstName,
+				Patronymic = newPatronymic,
+				Branch = newBranch,
 				Email = newEmail,
-				Filial = newFilial
+				PhoneNumber = newPhoneNumber,
+				Login = newLogin,
+				Password = newPassword,
+				Role = newRole
+
+
+
+
+
+
 			};
 
 			int result = bUsers.Edit(userToUpdate);

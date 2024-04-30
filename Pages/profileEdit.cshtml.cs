@@ -16,6 +16,8 @@ namespace inventory.Pages
 		public DBProfile bProfile = new DBProfile();
 		public List<Profile> profiles = new List<Profile>();
 		public Profile newProfile = new Profile();
+		public DBFilial bFilial = new DBFilial();
+		public List<Filial> filials = new List<Filial>();
 		public string UserRole { get; set; }
 		public string FirstName { get; set; }
 		public string Login { get; set; }
@@ -34,54 +36,78 @@ namespace inventory.Pages
 		{
 			Login = HttpContext.Session.GetString("Login");
 			profiles = bProfile.AllProfile(Login).ToList();
+			filials = bFilial.AllFilial.ToList();
 			UserRole = HttpContext.Session.GetString("UserRole");
 			FirstName = HttpContext.Session.GetString("FirstName");
 			Email = HttpContext.Session.GetString("Email");
 		}
 
-		public IActionResult OnPostAdd()
+		public async Task<IActionResult> OnPostAdd()
 		{
-			
-
+			// Получаем ID пользователя, к которому относится изображение
+			int userId = 1; // Необходимо заменить на логику получения ID пользователя
+			Login = HttpContext.Session.GetString("Login");
 			newProfile.LastName = Request.Form["LastName"];
 			newProfile.FirstName = Request.Form["FirstName"];
 			newProfile.Patronymic = Request.Form["Patronymic"];
 			newProfile.Branch = Request.Form["Branch"];
 			newProfile.Email = Request.Form["Email"];
 			newProfile.PhoneNumber = Request.Form["PhoneNumber"];
-
-			bProfile.Add(newProfile);
 			
+
+
+
 			profiles = bProfile.AllProfile(Login).ToList();
+			filials = bFilial.AllFilial.ToList();
 
 			try
 			{
 				_dbContext.Open();
 
+				// Проверяем наличие изображения
 				if (ImageFile != null && ImageFile.Length > 0)
 				{
 					using (var stream = new MemoryStream())
 					{
-						ImageFile.CopyToAsync(stream);
+						await ImageFile.CopyToAsync(stream);
 						newProfile.ImageData = stream.ToArray();
 					}
-					Console.WriteLine($"ImageData Length: {newProfile.ImageData.Length}");
 
-					string updateQuery = $"UPDATE Profile SET ImageData = @ImageData WHERE Id = {newProfile.Id}";
-					using (var command = new MySqlCommand(updateQuery, _dbContext))
+					Console.WriteLine($"ImageData Length: {newProfile.ImageData.Length}");
+				}
+
+				// Обновляем данные в базе данных
+				string updateQuery = $"UPDATE Profile SET LastName = @LastName, FirstName = @FirstName, Patronymic = @Patronymic, Branch = @Branch, Email = @Email, PhoneNumber = @PhoneNumber";
+				if (newProfile.ImageData != null) // Добавляем обновление изображения, если оно есть
+				{
+					updateQuery += ", ImageData = @ImageData";
+				}
+				updateQuery += $" WHERE Login = '{Login}'";
+
+				using (var command = new MySqlCommand(updateQuery, _dbContext))
+				{
+					command.Parameters.Add("@LastName", MySqlDbType.VarChar).Value = newProfile.LastName;
+					command.Parameters.Add("@FirstName", MySqlDbType.VarChar).Value = newProfile.FirstName;
+					command.Parameters.Add("@Patronymic", MySqlDbType.VarChar).Value = newProfile.Patronymic;
+					command.Parameters.Add("@Branch", MySqlDbType.VarChar).Value = newProfile.Branch;
+					command.Parameters.Add("@Email", MySqlDbType.VarChar).Value = newProfile.Email;
+					command.Parameters.Add("@PhoneNumber", MySqlDbType.VarChar).Value = newProfile.PhoneNumber;
+					command.Parameters.Add("@UserId", MySqlDbType.Int32).Value = userId;
+
+					if (newProfile.ImageData != null) // Добавляем параметр изображения, если оно есть
 					{
 						command.Parameters.Add("@ImageData", MySqlDbType.Blob).Value = newProfile.ImageData;
-
-						// Execute the query
-						command.ExecuteNonQuery();
-						Console.WriteLine("Data updated successfully.");
 					}
+
+					// Выполняем запрос
+					command.ExecuteNonQuery();
+					Console.WriteLine("Data updated successfully.");
 				}
 			}
 			catch (Exception ex)
 			{
 				Console.WriteLine($"Exception: {ex.Message}");
-				// Handle exceptions, log them, or display an error message
+				// Обработка исключений, журналирование или вывод сообщения об ошибке
 				return StatusCode(StatusCodes.Status500InternalServerError, "Internal Server Error");
 			}
 			finally
@@ -91,5 +117,7 @@ namespace inventory.Pages
 
 			return RedirectToPage("/profile");
 		}
+
+
 	}
 }

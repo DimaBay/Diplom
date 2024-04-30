@@ -100,7 +100,9 @@ body {
     border-bottom: 2px solid gray;
     appearance: none;
 }
-
+    .text-input:focus {
+        color: black;
+    }
 .buttonsave {
     align-self: center;
 }

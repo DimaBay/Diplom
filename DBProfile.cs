@@ -21,7 +21,8 @@ namespace inventory
                 
                     while (ProfileData.Read())
                     {
-                        profiles.Add(new Profile()
+                        
+                profiles.Add(new Profile()
                         {
                             Id = ProfileData.GetInt32(0),
                             LastName = ProfileData.GetString(1),
@@ -30,7 +31,9 @@ namespace inventory
                             Branch = ProfileData.GetString(4),
                             Email = ProfileData.GetString(5),
                             PhoneNumber = ProfileData.GetString(6),
-                         
+                            Login = ProfileData.GetString(7),
+                            Password = ProfileData.GetString(8),
+                            Role = ProfileData.GetString(9),
                             ImageData = ProfileData.GetFieldValue<byte[]>(10),
                         });
                     }

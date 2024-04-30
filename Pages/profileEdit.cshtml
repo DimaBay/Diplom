@@ -260,7 +260,7 @@
 			<div class="page-inner">
 				<div class="col-md-12">
 					<div class="card">
-						<form method="post" asp-page-handler="Add">
+						<form method="POST" asp-page-handler="Add" enctype="multipart/form-data">
 
 							<div class="card-body">
 								<div class="main-body">
@@ -290,9 +290,10 @@
 
 											<button class="delete">УДАЛИТЬ</button>
 										</div>
-										<div class="form-group" style="display: none;">
+										<div class="form-group" >
 
-											<input type="file" class="form-control" id="imageFile" name="ImageFile">
+											<input type="file" id="imageFile" style="display: none;" accept="image/*" onchange="displayImage(event)" name="ImageFile">
+
 										</div>
 											@foreach (var profile in Model.profiles)
 											{
@@ -311,8 +312,16 @@
 
 											<div class="moreinfo">
 												<span class="gray-text">Филиал:</span>
-												<input class="text-input" type="text" asp-for="newProfile.Branch" name="Branch" placeholder="@profile.Branch">
 
+
+												<select name="Branch" class="text-input" id="addBranch" type="text" asp-for="newProfile.Branch" name="Branch" placeholder="@profile.Branch">
+														@{
+															foreach (var filial in Model.filials)
+															{
+															<option value="@profile.Branch">@filial.Name</option>
+															}
+														}
+												</select>
 												<span class="gray-text">e-mail:</span>
 												<input class="text-input" type="text" asp-for="newProfile.Email" name="Email" placeholder="@profile.Email">
 
@@ -333,7 +342,9 @@
 
 			</div>
 			
-			<footer class="footer">
+			
+		</div>
+		<footer class="footer">
 				<div class="container-fluid">
 					<nav class="pull-left">
 						<ul class="nav">
@@ -354,8 +365,6 @@
 					</div>
 				</div>
 			</footer>
-		</div>
-
 		<!-- Custom template | don't include it in your project!
 		<div class="custom-template">
 			<div class="title">Settings</div>
@@ -471,8 +480,19 @@
 	<script src="assets/js/demo.js"></script>
 	<script>
 		function loadPhoto() {
-			// Trigger click event of the file input
 			document.getElementById('imageFile').click();
+		}
+
+		function displayImage(event) {
+			const file = event.target.files[0];
+			if (file) {
+				const reader = new FileReader();
+				reader.onload = function (e) {
+					const imageElement = document.querySelector('.avatar-big');
+					imageElement.src = e.target.result;
+				}
+				reader.readAsDataURL(file);
+			}
 		}
 	</script>
 	<script>
@@ -544,5 +564,8 @@
 			});
 		});
 	</script>
+
+
+	
 </body>
 </html>

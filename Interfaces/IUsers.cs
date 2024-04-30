@@ -12,5 +12,7 @@ namespace inventory.Interfaces
 		public int Edit(Users user);
 
 		public int Delete(Users user);
+
+		
 	}
 }

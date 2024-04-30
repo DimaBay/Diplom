@@ -298,8 +298,36 @@
 												<div class="row">
 													<div class="col-sm-12">
 														<div class="form-group form-group-default">
-															<label>ФИО</label>
-															<input name="FIO" id="addName" type="text" class="form-control" placeholder="введите ФИО">
+															<label>Фамилия</label>
+															<input name="LastName" id="addLastName" type="text" class="form-control" placeholder="введите фамилию">
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="form-group form-group-default">
+															<label>Имя</label>
+															<input name="FirstName" id="addFirstName" type="text" class="form-control" placeholder="введите имя">
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="form-group form-group-default">
+															<label>Отчество</label>
+															<input name="Patronymic" id="addPatronymic" type="text" class="form-control" placeholder="введите отчество">
+														</div>
+													</div>
+													
+													<div class="col-sm-12">
+														<div class="form-group form-group-default">
+															<label>Филиал</label>
+															<select name="Branch" class="form-control" id="addBranch">
+																
+
+																	@{
+																foreach (var filial in Model.filials)
+																{
+																<option value="@filial.Name">@filial.Name</option>
+																}
+																}
+															</select>
 														</div>
 													</div>
 													<div class="col-sm-12">
@@ -310,19 +338,29 @@
 													</div>
 													<div class="col-sm-12">
 														<div class="form-group form-group-default">
-															<label>Филиал</label>
-															<select name="Filial" class="form-control" id="addOffice">
-																@* <option>Центральный-2</option>
-																<option>Мотовилихинский</option>
-																<option>Индустриальный-2</option>
-																<option>Кировский-3</option> *@
-
-																	@{
-																foreach (var filial in Model.filials)
-																{
-																<option value="@filial.Name">@filial.Name</option>
-																}
-																}
+															<label>Номер телефона</label>
+															<input name="PhoneNumber" id="addPhoneNumber" type="text" class="form-control" placeholder="введите номер телефона" pattern="\d{11}" title="Введите 11 цифр без пробелов и других символов" minlength="11" maxlength="11">
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="form-group form-group-default">
+															<label>Логин</label>
+															<input name="Login" id="addLogin" type="text" class="form-control" placeholder="введите логин">
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="form-group form-group-default">
+															<label>Пароль</label>
+															<input name="Password" id="addPassword" type="text" class="form-control" placeholder="введите пароль">
+														</div>
+													</div>
+													<div class="col-sm-12">
+														<div class="form-group form-group-default">
+															<label>Роль</label>
+															
+															<select name="Role" class="form-control" id="addRole">
+																<option value="Администратор">Администратор</option>
+																<option value="Пользователь" selected>Пользователь</option>
 															</select>
 														</div>
 													</div>
@@ -371,9 +409,9 @@
 														foreach (var user in Model.users)
 										 {
 										  <tr>
-														<td>@user.FIO</td>
+														<td>@(user.LastName + " " + user.FirstName + " " + user.Patronymic)</td>
 														<td>@user.Email</td>
-														<td>@user.Filial</td>
+														<td>@user.Branch</td>
 															@if (@Model.UserRole == "Администратор")
 															{
 																<td>
@@ -383,9 +421,19 @@
 																			data-toggle="tooltip"
 																			data-target="#editRowModal"
 																			data-userid="@user.id"
-																			data-fio="@user.FIO"
+																			data-lastname="@user.LastName"
+																			data-firstname="@user.FirstName"
+																			data-patronymic="@user.Patronymic"
 																			data-email="@user.Email"
-																			data-filial="@user.Filial" data-original-title="Изменить">
+																			data-branch="@user.Branch"
+																			data-phonenumber="@user.PhoneNumber"
+																			data-login="@user.Login"
+																			data-password="@user.Password"
+																			data-role="@user.Role"
+																			
+																			
+																			
+																			data-original-title="Изменить">
 																				<i class="fa fa-edit"></i>
 																			</button>
 																		
@@ -414,20 +462,27 @@
 																							<div class="row">
 																								<div class="col-sm-12">
 																									<div class="form-group form-group-default">
-																										<label>ФИО</label>
-																										<input name="FIO" id="editName" type="text" class="form-control" placeholder="введите ФИО">
+																										<label>Фамилия</label>
+																									<input name="LastName" id="editLastName" type="text" class="form-control" placeholder="введите фамилию">
 																									</div>
 																								</div>
 																								<div class="col-sm-12">
 																									<div class="form-group form-group-default">
-																										<label>Почта</label>
-																										<input name="Email" id="editEmail" type="text" class="form-control" placeholder="введите почту">
+																										<label>Имя</label>
+																									<input name="FirstName" id="editFirstName" type="text" class="form-control" placeholder="введите имя">
 																									</div>
 																								</div>
+																							<div class="col-sm-12">
+																								<div class="form-group form-group-default">
+																									<label>Отчество</label>
+																									<input name="Patronymic" id="editPatronymic" type="text" class="form-control" placeholder="введите отчество">
+																								</div>
+																							</div>
+																								
 																								<div class="col-sm-12">
 																									<div class="form-group form-group-default">
 																										<label>Филиал</label>
-																										<select name="Filial" class="form-control" id="editOffice">
+																									<select name="Branch" class="form-control" id="editBranch">
 																											@foreach (var filial in Model.filials)
 																											{
 																												<option value="@filial.Name">@filial.Name</option>
@@ -435,6 +490,40 @@
 																										</select>
 																									</div>
 																								</div>
+																							<div class="col-sm-12">
+																								<div class="form-group form-group-default">
+																									<label>Почта</label>
+																									<input name="Email" id="editEmail" type="text" class="form-control" placeholder="введите почту">
+																								</div>
+																							</div>
+																							
+																								<div class="col-sm-12">
+																									<div class="form-group form-group-default">
+																										<label>Номер телефона</label>
+																									<input name="PhoneNumber" id="editPhoneNumber" type="tel" class="form-control" placeholder="введите номер телефона" pattern="\d{11}" title="Введите 11 цифр без пробелов и других символов" minlength="11" maxlength="11">
+																								</div>
+																								</div>
+																								<div class="col-sm-12">
+																									<div class="form-group form-group-default">
+																										<label>Логин</label>
+																									<input name="Login" id="editLogin" type="text" class="form-control" placeholder="введите логин">
+																									</div>
+																								</div>
+																							<div class="col-sm-12">
+																								<div class="form-group form-group-default">
+																									<label>Пароль</label>
+																									<input name="Password" id="editPassword" type="text" class="form-control" placeholder="введите пароль">
+																								</div>
+																							</div>
+																							<div class="col-sm-12">
+																								<div class="form-group form-group-default">
+																									<label>Роль</label>
+																									<select name="Role" class="form-control" id="editRole">
+																										<option value="Администратор">Администратор</option>
+																										<option value="Пользователь">Пользователь</option>
+																									</select>
+																								</div>
+																							</div>
 																								<input type="hidden" name="id" id="editUserId" />
 																							</div>
 
@@ -677,10 +766,11 @@
 			var action = '<td><div class="form-button-action"><button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Изменить"><i class="fa fa-edit"></i></button><button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Удалить"><i class="fa fa-times"></i></button></div></td>';
 			var actionChekBox = '<td> <div class="form-check"> <label class="form-check-label"> <input class="form-check-input" type="checkbox" value=""> <span class="form-check-sign"></span> </label> </div> </td>';
 			$('#addRowButton').click(function () {
+				var fio = $('#addLastName').val() + ' ' + $('#addFirstName').val() + ' ' + $('#addPatronymic').val();
 				$('#add-row').dataTable().fnAddData([
-					$("#addName").val(),
+					fio,
 					$("#addEmail").val(),
-					$("#addOffice").val(),
+					$("#addBranch").val(),
 					action
 				]);
 				$('#addRowModal').modal('hide');
@@ -688,53 +778,97 @@
 			});
 		});
 	</script>
-		<script>
-			$(document).ready(function () {
-				$('#add-row').DataTable();
+	<script>
+		$(document).ready(function () {
+			$('#add-row').DataTable();
 
-				$('#add-row').on('click', '.btn-edit', function () {
-					var userId = $(this).data('userid');
-					var fio = $(this).data('fio');
-					var email = $(this).data('email');
-					var filial = $(this).data('filial');
+			$('#add-row').on('click', '.btn-edit', function () {
+				var userId = $(this).data('userid');
+				var lastName = $(this).data('lastname');
+				var firstName = $(this).data('firstname');
+				var patronymic = $(this).data('patronymic');
+				var branch = $(this).data('branch');
+				var email = $(this).data('email');
+				var phoneNumber = $(this).data('phonenumber');
+				var login = $(this).data('login');
+				var password = $(this).data('password');
+				var role = $(this).data('role');
 
-					$('#editUserId').val(userId);
-					$('#editName').val(fio);
-					$('#editEmail').val(email);
-					$('#editOffice').val(filial);
+				$('#editUserId').val(userId);
+				$('#editLastName').val(lastName);
+				$('#editFirstName').val(firstName);
+				$('#editPatronymic').val(patronymic);
+				$('#editBranch').val(branch);
+				$('#editEmail').val(email);
+				$('#editPhoneNumber').val(phoneNumber);
+				$('#editLogin').val(login);
+				$('#editPassword').val(password);
+				$('#editRole').val(role);
 
-					$('#editRowModal').modal('show');
-				});
-
-				$('#btnSaveEdit').click(function () {
-					var userId = $('#editUserId').val();
-					var fio = $('#editName').val();
-					var email = $('#editEmail').val();
-					var filial = $('#editOffice').val();
-
-					$.ajax({
-						url: '/user',
-						type: 'POST',
-						data: {
-							id: userId,
-							FIO: fio,
-							Email: email,
-							Filial: filial
-						},
-						success: function (response) {
-
-							location.reload();
-						},
-						error: function (error) {
-							console.error('Error:', error);
-						}
-					});
-
-					$('#editRowModal').modal('hide');
-				});
+				$('#editRowModal').modal('show');
 			});
 
-	
+			$('#btnSaveEdit').click(function () {
+				var userId = $('#editUserId').val();
+				var lastName = $('#editLastName').val();
+				var firstName = $('#editFirstName').val();
+				var patronymic = $('#editPatronymic').val();
+				var branch = $('#editBranch').val();
+				var email = $('#editEmail').val();
+				var phoneNumber = $('#editPhoneNumber').val();
+				var login = $('#editLogin').val();
+				var password = $('#editPassword').val();
+				
+				var role = $('#editRole').val();
+
+				$.ajax({
+					url: '/user',
+					type: 'POST',
+					data: {
+						id: userId,
+						LastName: lastName,
+						FirstName: firstName,
+						Patronymic: patronymic,
+						Branch: branch,
+						Email: email,
+						PhoneNumber: phoneNumber,
+						Password: password,
+						Role: role
+					},
+					success: function (response) {
+						location.reload();
+					},
+					error: function (error) {
+						console.error('Error:', error);
+					}
+				});
+
+				$('#editRowModal').modal('hide');
+			});
+
+			$('#editPhoneNumber').on('input', function (e) {
+				this.value = this.value.replace(/\D/g, ''); // Удаляет все не-цифровые символы
+			});
+
+			$('#addPhoneNumber').on('input', function (e) {
+				this.value = this.value.replace(/\D/g, ''); // Удаляет все не-цифровые символы
+			});
+		});
+	</script>
+
+	<script>
+		document.getElementById('editPhoneNumber').addEventListener('input', function (e) {
+			this.value = this.value.replace(/[^0-9]/g, ''); // Удаляет все не-цифровые символы
+		});
+	</script>
+
+	<script>
+		document.getElementById('addPhoneNumber').addEventListener('input', function (e) {
+			this.value = this.value.replace(/[^0-9]/g, ''); // Удаляет все не-цифровые символы
+		});
 	</script>
 </body>
 </html>
+
+
+					

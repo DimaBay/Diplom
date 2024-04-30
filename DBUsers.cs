@@ -21,21 +21,28 @@ namespace inventory
             {
 				List<Users> users = new List<Users>();
 
-				
 
-                MySqlDataReader UsersData = Connection.SqlConnection("SELECT * FROM DataBase.Users");
 
-                while (UsersData.Read())
-                {
-					
+				MySqlDataReader UsersData = Connection.SqlConnection("SELECT * FROM DataBase.Profile");
+
+				while (UsersData.Read())
+				{
+
 					users.Add(new Users()
 					{
+
 						id = UsersData.GetInt32(0),
-						FIO = UsersData.GetString(1),
-						Filial = UsersData.GetString(2),
-						Email = UsersData.GetString(3),
+						LastName = UsersData.GetString(1),
+						FirstName = UsersData.GetString(2),
+						Patronymic = UsersData.GetString(3),
+						Branch = UsersData.GetString(4),
+						Email = UsersData.GetString(5),
+						PhoneNumber = UsersData.GetString(6),
+						Login = UsersData.GetString(7),
+						Password = UsersData.GetString(8),
+						Role = UsersData.GetString(9)
 					});
-					
+
 
 				}
 				UsersData.Close();
@@ -49,7 +56,7 @@ namespace inventory
 		{
 
 			MySqlDataReader UsersData = Connection.SqlConnection(
-				$"insert into Users (FIO, Filial, Email) values ('{user.FIO}','{user.Filial}','{user.Email}');");
+				$"insert into Profile (LastName, FirstName, Patronymic, Branch, Email, PhoneNumber, Login, Password, Role) values ('{user.LastName}','{user.FirstName}','{user.Patronymic}','{user.Branch}','{user.Email}','{user.PhoneNumber}','{user.Login}','{user.Password}','{user.Role}');");
 
 			int IdUser = -1;
 
@@ -59,7 +66,7 @@ namespace inventory
 		public int Edit(Users user)
 		{
 			MySqlDataReader UsersData = Connection.SqlConnection(
-				$"update Users set FIO = '{user.FIO}', Filial = '{user.Filial}', Email = '{user.Email}' where id = {user.id};");
+				$"update Profile set LastName = '{user.LastName}', FirstName = '{user.FirstName}', Patronymic = '{user.Patronymic}', Branch = '{user.Branch}', Email = '{user.Email}', PhoneNumber = '{user.PhoneNumber}', Login = '{user.Login}', Password = '{user.Password}', Role = '{user.Role}' where id = {user.id};");
 
 			int IdUser = -1;
 			UsersData.Close();
@@ -70,7 +77,7 @@ namespace inventory
 		{
 
 			MySqlDataReader UsersData = Connection.SqlConnection(
-				$"Delete from Users where id = {user.id}");
+				$"Delete from Profile where id = {user.id}");
 			UsersData.Close();
 			return -1;
 		}
