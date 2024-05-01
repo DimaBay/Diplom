@@ -144,6 +144,8 @@
 									</div>
 								</li>
 								<li>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="profileEdit">Изменить профиль</a>
 									
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="login">Выйти</a>
@@ -191,15 +193,15 @@
 							<span>
 									@Model.FirstName
 								<span class="user-level">@Model.UserRole</span>
-								<span class="caret"></span>
+								@* <span class="caret"></span> *@
 							</span>
 
 
 						</a>
-						<div class="clearfix"></div>
+						@* <div class="clearfix"></div> *@
 
-						<div class="collapse in" id="collapseExample">
-							@* <ul class="nav">
+						@* <div class="collapse in" id="collapseExample">
+							<ul class="nav">
 								<li>
 									<a href="profile">
 										<span class="link-collapse">Мой профиль</span>
@@ -210,13 +212,9 @@
 										<span class="link-collapse">Изменить профиль</span>
 									</a>
 								</li>
-								<li>
-									<a href="#settings">
-										<span class="link-collapse">Настройки</span>
-									</a>
-								</li>
-							</ul> *@
-						</div>
+								
+							</ul>
+						</div> *@
 					</div>
 				</div>
 				<ul class="nav nav-primary">

@@ -31,13 +31,13 @@
             <div class="text-field__icon text-field__icon_pwd">
                 <input name="Password" class="text-field__input" type="password"> 
             </div>
-            <div class="KeepLoggedInT">
+            @* <div class="KeepLoggedInT">
                 <input type="checkbox" class="checkbox-round" id="scales" name="scales" />
-                <label for="scales">Запомнить меня</label>
+                <label  for="scales">Запомнить меня</label>
             </div>
-            <a href="index" class="HrefLogin">
-                <button class="buttonLogIn" onclick="return authenticateUser()"><span>ВОЙТИ</span></button>
-            </a>
+            <a href="index" class="HrefLogin"> *@
+                <button class="buttonLogIn" onclick="return authenticateUser()" style="cursor: pointer;"><span>ВОЙТИ</span></button>
+            @* </a> *@
          
         </div>
         </form>
