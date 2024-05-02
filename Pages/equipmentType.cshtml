@@ -1,9 +1,7 @@
 ﻿@page
 @using inventory
-@model inventory.Pages.inventoryModel
-
+@model inventory.Pages.equipmentTypeModel
 @{
-
 }
 <!DOCTYPE html>
 <html lang="en">
@@ -125,8 +123,8 @@
 												{
 												<img src="assets/img/orel-avatar.jpg" alt="image profile" class="avatar-img rounded">
 
-												}
-											@* <img src="assets/img/orel-avatar.jpg" alt="image profile" class="avatar-img rounded"> *@</div>
+												}@* <img src="assets/img/orel-avatar.jpg" alt="image profile" class="avatar-img rounded"> *@
+										</div>
 										<div class="u-text">
 											<h4>@Model.FirstName</h4>
 											<p class="text-muted">@Model.Email</p><a href="profile" class="btn btn-xs btn-secondary btn-sm">Отркыть профиль</a>
@@ -269,7 +267,7 @@
 					<div class="card">
 						<div class="card-header">
 							<div class="d-flex align-items-center">
-								<h4 class="card-title">Инвентаризация</h4>
+								<h4 class="card-title">Типы оборудования</h4>
 								@if (@Model.UserRole=="Администратор")
 																	{
 								<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
@@ -299,47 +297,15 @@
 										</div>
 										<div class="modal-body">
 											<p class="small">Создайте новую строку, используя эту форму. Обязательно заполните их все.</p>
-											<form method="post" asp-page-handler="Add">
+											<form method="post" asp-page-handler="Add"	>
 												<div class="row">
 													<div class="col-sm-12">
 														<div class="form-group form-group-default">
-															<label>МОЛ</label>
-															<select name="mol" class="form-control" id="addmol">
-																	@{
-																		foreach (var user in Model.users)
-																		{
-																		<option value="@user.FIO">@user.FIO</option>
-																		}
-																	}
-															</select>
+															<label>Тип оборудования</label>
+															<input name="LastName" id="addLastName" type="text" class="form-control" placeholder="введите название">
 														</div>
 													</div>
-													<div class="col-sm-12">
-														<div class="form-group form-group-default">
-															<label>Филиал</label>
-															<select name="Filial" class="form-control" id="addFilial">
-																	@{
-																		foreach (var filial in Model.filials)
-																		{
-																		<option value="@filial.Name">@filial.Name</option>
-																		}
-																	}
-															</select>
-														</div>
-													</div>
-													<div class="col-sm-12">
-														<div class="form-group form-group-default">
-															<label>Оборудование</label>
-															<select name="Equipment" class="form-control" id="addEquipment">
-																	@{
-																		foreach (var equipment in Model.equipment)
-																		{
-																		<option value="@equipment.name">@equipment.name</option>
-																		}
-																	}
-															</select>
-														</div>
-													</div>
+													
 												</div>
 												<div class="modal-footer no-bd">
 													<button type="submit" id="addRowButton" class="btn btn-primary">Добавить</button>
@@ -347,7 +313,7 @@
 												</div>
 											</form>
 										</div>
-
+										
 									</div>
 								</div>
 							</div>
@@ -357,20 +323,18 @@
 								<table id="add-row" class="display table table-striped table-hover">
 									<thead>
 										<tr>
-											<th>МОЛ</th>
-											<th>Филиал</th>
-											<th>Оборудование</th>
-												@if (@Model.UserRole == "Администратор")
-												{
-													<th style="width: 10%">Action</th>
-												}
-											</tr>
+											<th>Тип оборудования</th>
+											
+											@if (@Model.UserRole=="Администратор")
+																	{
+											<th style="width: 10%">Action</th>
+																	}
+										</tr>
 									</thead>
 									<tfoot>
 										<tr>
-											<th>МОЛ</th>
-											<th>Филиал</th>
-											<th>Оборудование</th>
+											<th>Тип оборудования</th>
+											
 											@if (@Model.UserRole=="Администратор")
 																	{
 											<th>Action</th>
@@ -379,31 +343,33 @@
 									</tfoot>
 									<tbody>
 
-											@{
-												if (Model != null)
-												{
-													foreach (var inventory in Model.inventory)
-													{
-													<tr>
-														<td>@inventory.mol</td>
-														<td>@inventory.Filial</td>
-														<td>@inventory.Equipment</td>
+									@{
+										if (Model != null)
+										{
+														foreach (var user in Model.equipmentTypeModels)
+										 {
+										  <tr>
+														
+														
+														<td>@user.Type</td>
 															@if (@Model.UserRole == "Администратор")
 															{
 																<td>
 																	<div class="form-button-action">
-																		@if (@Model.UserRole == "Администратор")
-																		{
+																		
 																			<button type="button" class="btn btn-link btn-primary btn-lg btn-edit"
 																			data-toggle="tooltip"
 																			data-target="#editRowModal"
-																			data-inventoryId="@inventory.id"
-																			data-mol="@inventory.mol"
-																			data-Filial="@inventory.Filial"
-																			data-Equipment="@inventory.Equipment" data-original-title="Изменить">
+																			data-userid="@user.Id"
+																			data-lastname="@user.Type"
+																			
+																			
+																			
+																			
+																			data-original-title="Изменить">
 																				<i class="fa fa-edit"></i>
 																			</button>
-																		}
+																		
 																		<div class="modal fade" id="editRowModal" tabindex="-1" role="dialog" aria-hidden="true">
 																			<div class="modal-dialog" role="document">
 																				<div class="modal-content">
@@ -429,38 +395,12 @@
 																							<div class="row">
 																								<div class="col-sm-12">
 																									<div class="form-group form-group-default">
-																										<label>МОЛ</label>
-																										<select name="mol" class="form-control" id="editmol">
-																											@foreach (var user in Model.users)
-																											{
-																												<option value="@user.FIO">@user.FIO</option>
-																											}
-																										</select>
+																										<label>Тип оборудования</label>
+																									<input name="LastName" id="editLastName" type="text" class="form-control" placeholder="введите название">
 																									</div>
 																								</div>
-																								<div class="col-sm-12">
-																									<div class="form-group form-group-default">
-																										<label>Филиал</label>
-																										<select name="Filial" class="form-control" id="editFilial">
-																											@foreach (var filial in Model.filials)
-																											{
-																												<option value="@filial.Name">@filial.Name</option>
-																											}
-																										</select>
-																									</div>
-																								</div>
-																								<div class="col-sm-12">
-																									<div class="form-group form-group-default">
-																										<label>Оборудование</label>
-																										<select name="Equipment" class="form-control" id="editEquipment">
-																											@foreach (var equipment in Model.equipment)
-																											{
-																												<option value="@equipment.name">@equipment.name</option>
-																											}
-																										</select>
-																									</div>
-																								</div>
-																								<input type="hidden" name="id" id="editinventoryId" />
+																								
+																								<input type="hidden" name="id" id="editUserId" />
 																							</div>
 
 
@@ -477,8 +417,8 @@
 
 																		@if (@Model.UserRole == "Администратор")
 																		{
-																			<form method="POST" asp-page-handler="Delete" onsubmit="return confirm('Вы уверены, что хотите удалить?');">
-																				<input type="hidden" name="id" value="@inventory.id" />
+																			<form method="POST" asp-page-handler="Delete" onsubmit="return confirm('Вы уверены, что хотите удалить этот тип оборудования?');">
+																				<input type="hidden" name="id" value="@user.Id" />
 																				<button type="submit" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Удалить">
 																					<i class="fa fa-times" style="padding-top: 7px"></i>
 																				</button>
@@ -490,7 +430,7 @@
 														</tr>
 													}
 												}
-											}
+									 }
 
 
 									</tbody>
@@ -702,10 +642,9 @@
 			var action = '<td><div class="form-button-action"><button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Изменить"><i class="fa fa-edit"></i></button><button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Удалить"><i class="fa fa-times"></i></button></div></td>';
 			var actionChekBox = '<td> <div class="form-check"> <label class="form-check-label"> <input class="form-check-input" type="checkbox" value=""> <span class="form-check-sign"></span> </label> </div> </td>';
 			$('#addRowButton').click(function () {
+				
 				$('#add-row').dataTable().fnAddData([
-					$("#addmol").val(),
-					$("#addFilial").val(),
-					$("#addEquipment").val(),
+					$("#addLastName").val(),
 					action
 				]);
 				$('#addRowModal').modal('hide');
@@ -718,36 +657,32 @@
 			$('#add-row').DataTable();
 
 			$('#add-row').on('click', '.btn-edit', function () {
-				var inventoryId = $(this).data('inventoryId');
-				var mol = $(this).data('mol');
-				var filial = $(this).data('filial');
-				var equipment = $(this).data('equipment');
+				var userId = $(this).data('userid');
+				var lastName = $(this).data('lastname');
+				
 
-				$('#editinventoryId').val(inventoryId);
-				$('#editmol').val(mol);
-				$('#editFilial').val(filial);
-				$('#editEquipment').val(equipment);
+				$('#editUserId').val(userId);
+				$('#editLastName').val(lastName);
+				
 
 				$('#editRowModal').modal('show');
 			});
 
 			$('#btnSaveEdit').click(function () {
-				var inventoryId = $('#editinventoryId').val();
-				var mol = $('#editmol').val();
-				var filial = $('#editFilial').val();
-				var equipment = $('#editEquipment').val();
+				var userId = $('#editUserId').val();
+				var lastName = $('#editLastName').val();
+				
+				
+				var role = $('#editRole').val();
 
 				$.ajax({
-					url: '/inventory',
+					url: '/equipmentType',
 					type: 'POST',
 					data: {
-						id: inventoryId,
-						mol: mol,
-						Filial: filial,
-						Equipment: equipment
+						id: userId,
+						LastName: lastName
 					},
 					success: function (response) {
-
 						location.reload();
 					},
 					error: function (error) {
@@ -757,9 +692,30 @@
 
 				$('#editRowModal').modal('hide');
 			});
+
+			$('#editPhoneNumber').on('input', function (e) {
+				this.value = this.value.replace(/\D/g, ''); // Удаляет все не-цифровые символы
+			});
+
+			$('#addPhoneNumber').on('input', function (e) {
+				this.value = this.value.replace(/\D/g, ''); // Удаляет все не-цифровые символы
+			});
 		});
+	</script>
 
+	<script>
+		document.getElementById('editPhoneNumber').addEventListener('input', function (e) {
+			this.value = this.value.replace(/[^0-9]/g, ''); // Удаляет все не-цифровые символы
+		});
+	</script>
 
+	<script>
+		document.getElementById('addPhoneNumber').addEventListener('input', function (e) {
+			this.value = this.value.replace(/[^0-9]/g, ''); // Удаляет все не-цифровые символы
+		});
 	</script>
 </body>
 </html>
+
+
+					

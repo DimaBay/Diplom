@@ -1,0 +1,10 @@
+﻿namespace inventory.Models
+{
+    public class TypeEquipment
+    {
+        public int Id { get; set; }
+
+
+        public string Type { get; set; }
+    }
+}

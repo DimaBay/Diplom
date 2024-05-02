@@ -1,6 +1,6 @@
 ﻿@page
 @using inventory
-@model inventory.Pages.inventoryModel
+@model inventory.Pages.filialsModel
 
 @{
 
@@ -86,18 +86,16 @@
 										if (profile.ImageData != null && profile.ImageData.Length > 0)
 										{
 											var base64Image = Convert.ToBase64String(profile.ImageData);
-											<img src="data:image/png;base64, @base64Image" alt="..." class="avatar-img rounded-circle">
-
+											<img src="data:image/png;base64, @base64Image" alt="..." class="avatar-img rounded">
 										}
 										else
 										{
-											<img src="assets/img/orel-avatar.jpg" alt="..." class="avatar-img rounded-circle">
+											<img src="assets/img/orel-avatar.jpg" alt="..." class="avatar-img rounded">
 										}
 									}
 									else
 									{
-										<img src="assets/img/orel-avatar.jpg" alt="..." class="avatar-img rounded-circle">
-
+										<img src="assets/img/orel-avatar.jpg" alt="..." class="avatar-img rounded">
 									}
 									@* <img src="assets/img/orel-avatar.jpg" alt="..." class="avatar-img rounded-circle"> *@
 								</div>
@@ -106,6 +104,7 @@
 								<div class="dropdown-user-scroll scrollbar-outer">
 								<li>
 									<div class="user-box">
+
 										<div class="avatar-lg">
 												@if (Model != null && Model.profiles.Count > 0)
 												{
@@ -114,7 +113,6 @@
 													{
 														var base64Image = Convert.ToBase64String(profile.ImageData);
 													<img src="data:image/png;base64, @base64Image" alt="image profile" class="avatar-img rounded">
-
 													}
 													else
 													{
@@ -124,9 +122,8 @@
 												else
 												{
 												<img src="assets/img/orel-avatar.jpg" alt="image profile" class="avatar-img rounded">
-
-												}
-											@* <img src="assets/img/orel-avatar.jpg" alt="image profile" class="avatar-img rounded"> *@</div>
+												}@* <img src="assets/img/orel-avatar.jpg" alt="image profile" class="avatar-img rounded"> *@
+										</div>
 										<div class="u-text">
 											<h4>@Model.FirstName</h4>
 											<p class="text-muted">@Model.Email</p><a href="profile" class="btn btn-xs btn-secondary btn-sm">Отркыть профиль</a>
@@ -136,7 +133,7 @@
 								<li>
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="profileEdit">Изменить профиль</a>
-									@* <div class="dropdown-divider"></div>
+										@* <div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="#">Настройки</a> *@
 									<div class="dropdown-divider"></div>
 									<a class="dropdown-item" href="login">Выйти</a>
@@ -162,49 +159,49 @@
 								if (profile.ImageData != null && profile.ImageData.Length > 0)
 								{
 									var base64Image = Convert.ToBase64String(profile.ImageData);
-								<img src="data:image/png;base64, @base64Image" alt="..." class="avatar-img rounded-circle">
+								<img src="data:image/png;base64, @base64Image" alt="image profile" class="avatar-img rounded-circle">
 
 								}
 								else
 								{
-								<img src="assets/img/orel-avatar.jpg" alt="..." class="avatar-img rounded-circle">
+								<img src="assets/img/orel-avatar.jpg" alt="image profile" class="avatar-img rounded-circle">
 								}
 							}
 							else
 							{
-							<img src="assets/img/orel-avatar.jpg" alt="..." class="avatar-img rounded-circle">
+							<img src="assets/img/orel-avatar.jpg" alt="image profile" class="avatar-img rounded-circle">
 
 							}
-						@* <img src="assets/img/orel-avatar.jpg" alt="..." class="avatar-img rounded-circle"> *@
+							@* <img src="assets/img/orel-avatar.jpg" alt="..." class="avatar-img rounded-circle"> *@
 					</div>
 					<div class="info">
 						<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 							<span>
 									@Model.FirstName
 								<span class="user-level">@Model.UserRole</span>
-								@* <span class="caret"></span> *@
+									@* <span class="caret"></span> *@
 							</span>
 						</a>
-						@* <div class="clearfix"></div>
+							@* <div class="clearfix"></div>
 
 						<div class="collapse in" id="collapseExample">
-							<ul class="nav">
-								<li>
-									<a href="profile">
-										<span class="link-collapse">Мой профиль</span>
-									</a>
-								</li>
-								<li>
-									<a href="profileEdit">
-										<span class="link-collapse">Изменить профиль</span>
-									</a>
-								</li>
-								<li>
-									<a href="#settings">
-										<span class="link-collapse">Настройки</span>
-									</a>
-								</li>
-							</ul>
+						<ul class="nav">
+						<li>
+						<a href="profile">
+						<span class="link-collapse">Мой профиль</span>
+						</a>
+						</li>
+						<li>
+						<a href="profileEdit">
+						<span class="link-collapse">Изменить профиль</span>
+						</a>
+						</li>
+						<li>
+						<a href="#settings">
+						<span class="link-collapse">Настройки</span>
+						</a>
+						</li>
+						</ul>
 						</div> *@
 					</div>
 				</div>
@@ -269,14 +266,14 @@
 					<div class="card">
 						<div class="card-header">
 							<div class="d-flex align-items-center">
-								<h4 class="card-title">Инвентаризация</h4>
-								@if (@Model.UserRole=="Администратор")
-																	{
-								<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
-									<i class="fa fa-plus"></i>
-									Добавить
-								</button>
-																	}
+								<h4 class="card-title">Филиалы</h4>
+									@if (@Model.UserRole == "Администратор")
+									{
+									<button class="btn btn-primary btn-round ml-auto" data-toggle="modal" data-target="#addRowModal">
+										<i class="fa fa-plus"></i>
+										Добавить
+									</button>
+									}
 							</div>
 						</div>
 						<div class="card-body">
@@ -303,43 +300,17 @@
 												<div class="row">
 													<div class="col-sm-12">
 														<div class="form-group form-group-default">
-															<label>МОЛ</label>
-															<select name="mol" class="form-control" id="addmol">
-																	@{
-																		foreach (var user in Model.users)
-																		{
-																		<option value="@user.FIO">@user.FIO</option>
-																		}
-																	}
-															</select>
+															<label>Название</label>
+															<input name="Name" id="addName" type="text" class="form-control" placeholder="введите название">
 														</div>
 													</div>
 													<div class="col-sm-12">
 														<div class="form-group form-group-default">
-															<label>Филиал</label>
-															<select name="Filial" class="form-control" id="addFilial">
-																	@{
-																		foreach (var filial in Model.filials)
-																		{
-																		<option value="@filial.Name">@filial.Name</option>
-																		}
-																	}
-															</select>
+															<label>Адрес</label>
+															<input name="Address" id="addAddress" type="text" class="form-control" placeholder="введите адрес">
 														</div>
 													</div>
-													<div class="col-sm-12">
-														<div class="form-group form-group-default">
-															<label>Оборудование</label>
-															<select name="Equipment" class="form-control" id="addEquipment">
-																	@{
-																		foreach (var equipment in Model.equipment)
-																		{
-																		<option value="@equipment.name">@equipment.name</option>
-																		}
-																	}
-															</select>
-														</div>
-													</div>
+
 												</div>
 												<div class="modal-footer no-bd">
 													<button type="submit" id="addRowButton" class="btn btn-primary">Добавить</button>
@@ -357,24 +328,22 @@
 								<table id="add-row" class="display table table-striped table-hover">
 									<thead>
 										<tr>
-											<th>МОЛ</th>
-											<th>Филиал</th>
-											<th>Оборудование</th>
+											<th>Название</th>
+											<th>Адрес</th>
 												@if (@Model.UserRole == "Администратор")
 												{
-													<th style="width: 10%">Action</th>
+												<th style="width: 10%">Action</th>
 												}
-											</tr>
+										</tr>
 									</thead>
 									<tfoot>
 										<tr>
-											<th>МОЛ</th>
-											<th>Филиал</th>
-											<th>Оборудование</th>
-											@if (@Model.UserRole=="Администратор")
-																	{
-											<th>Action</th>
-																	}
+											<th>Название</th>
+											<th>Адрес</th>
+												@if (@Model.UserRole == "Администратор")
+												{
+												<th>Action</th>
+												}
 										</tr>
 									</tfoot>
 									<tbody>
@@ -382,112 +351,91 @@
 											@{
 												if (Model != null)
 												{
-													foreach (var inventory in Model.inventory)
+													foreach (var filial in Model.filials)
 													{
 													<tr>
-														<td>@inventory.mol</td>
-														<td>@inventory.Filial</td>
-														<td>@inventory.Equipment</td>
+														<td>@filial.Name</td>
+														<td>@filial.Address</td>
 															@if (@Model.UserRole == "Администратор")
 															{
-																<td>
-																	<div class="form-button-action">
+															<td>
+																<div class="form-button-action">
 																		@if (@Model.UserRole == "Администратор")
 																		{
-																			<button type="button" class="btn btn-link btn-primary btn-lg btn-edit"
-																			data-toggle="tooltip"
-																			data-target="#editRowModal"
-																			data-inventoryId="@inventory.id"
-																			data-mol="@inventory.mol"
-																			data-Filial="@inventory.Filial"
-																			data-Equipment="@inventory.Equipment" data-original-title="Изменить">
-																				<i class="fa fa-edit"></i>
-																			</button>
+																		<button type="button" class="btn btn-link btn-primary btn-lg btn-edit"
+																				data-toggle="tooltip"
+																				data-target="#editRowModal"
+																				data-filialId="@filial.id"
+																				data-Name="@filial.Name"
+																				data-Address="@filial.Address"
+																				data-original-title="Изменить">
+																			<i class="fa fa-edit"></i>
+																		</button>
 																		}
-																		<div class="modal fade" id="editRowModal" tabindex="-1" role="dialog" aria-hidden="true">
-																			<div class="modal-dialog" role="document">
-																				<div class="modal-content">
-																					<form method="POST" asp-page-handler="Edit">
-																						<div class="modal-header no-bd">
-																							<h5 class="modal-title">
-																								<span class="fw-mediumbold">
-																									Изменить
-																								</span>
-																								<span class="fw-light">
-																									Запись
-																								</span>
-																							</h5>
-																							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																								<span aria-hidden="true">&times;</span>
-																							</button>
-																						</div>
+																	<div class="modal fade" id="editRowModal" tabindex="-1" role="dialog" aria-hidden="true">
+																		<div class="modal-dialog" role="document">
+																			<div class="modal-content">
+																				<form method="POST" asp-page-handler="Edit">
+																					<div class="modal-header no-bd">
+																						<h5 class="modal-title">
+																							<span class="fw-mediumbold">
+																								Изменить
+																							</span>
+																							<span class="fw-light">
+																								Запись
+																							</span>
+																						</h5>
+																						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																							<span aria-hidden="true">&times;</span>
+																						</button>
+																					</div>
 
-																						<div class="modal-body">
-																							<p class="small">Измените данные в форме ниже:</p>
+																					<div class="modal-body">
+																						<p class="small">Измените данные в форме ниже:</p>
 
 
-																							<div class="row">
-																								<div class="col-sm-12">
-																									<div class="form-group form-group-default">
-																										<label>МОЛ</label>
-																										<select name="mol" class="form-control" id="editmol">
-																											@foreach (var user in Model.users)
-																											{
-																												<option value="@user.FIO">@user.FIO</option>
-																											}
-																										</select>
-																									</div>
+																						<div class="row">
+																							<div class="col-sm-12">
+																								<div class="form-group form-group-default">
+																									<label>Название</label>
+																									<input name="Name" id="editName" type="text" class="form-control" placeholder="введите Название">
 																								</div>
-																								<div class="col-sm-12">
-																									<div class="form-group form-group-default">
-																										<label>Филиал</label>
-																										<select name="Filial" class="form-control" id="editFilial">
-																											@foreach (var filial in Model.filials)
-																											{
-																												<option value="@filial.Name">@filial.Name</option>
-																											}
-																										</select>
-																									</div>
+																							</div>
+																							<div class="col-sm-12">
+																								<div class="form-group form-group-default">
+																									<label>Адрес</label>
+																									<input name="Address" id="editAddress" type="text" class="form-control" placeholder="введите Адрес">
 																								</div>
-																								<div class="col-sm-12">
-																									<div class="form-group form-group-default">
-																										<label>Оборудование</label>
-																										<select name="Equipment" class="form-control" id="editEquipment">
-																											@foreach (var equipment in Model.equipment)
-																											{
-																												<option value="@equipment.name">@equipment.name</option>
-																											}
-																										</select>
-																									</div>
-																								</div>
-																								<input type="hidden" name="id" id="editinventoryId" />
 																							</div>
 
-
-																							<div class="modal-footer no-bd">
-																								<button type="submit" class="btn btn-primary" id="btnSaveEdit">Сохранить изменения</button>
-																								<button type="button" class="btn btn-danger" data-dismiss="modal">Закрыть</button>
-																							</div>
-
+																							<input type="hidden" name="id" id="editfilialId" />
 																						</div>
-																					</form>
-																				</div>
+
+
+																						<div class="modal-footer no-bd">
+																							<button type="submit" class="btn btn-primary" id="btnSaveEdit">Сохранить изменения</button>
+																							<button type="button" class="btn btn-danger" data-dismiss="modal">Закрыть</button>
+																						</div>
+
+																					</div>
+																				</form>
 																			</div>
 																		</div>
+																	</div>
 
 																		@if (@Model.UserRole == "Администратор")
 																		{
-																			<form method="POST" asp-page-handler="Delete" onsubmit="return confirm('Вы уверены, что хотите удалить?');">
-																				<input type="hidden" name="id" value="@inventory.id" />
-																				<button type="submit" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Удалить">
-																					<i class="fa fa-times" style="padding-top: 7px"></i>
-																				</button>
-																			</form>
+																		<form method="POST" asp-page-handler="Delete" onsubmit="return confirm('Вы уверены, что хотите удалить этот филиал?');">
+																			<input type="hidden" name="id" value="@filial.id" />
+																			<button type="submit" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Удалить">
+																				<i class="fa fa-times" style="padding-top: 7px"></i>
+																			</button>
+																		</form>
 																		}
-																	</div>
-																</td>
+																</div>
+															</td>
 															}
-														</tr>
+													</tr>
 													}
 												}
 											}
@@ -703,9 +651,9 @@
 			var actionChekBox = '<td> <div class="form-check"> <label class="form-check-label"> <input class="form-check-input" type="checkbox" value=""> <span class="form-check-sign"></span> </label> </div> </td>';
 			$('#addRowButton').click(function () {
 				$('#add-row').dataTable().fnAddData([
-					$("#addmol").val(),
-					$("#addFilial").val(),
-					$("#addEquipment").val(),
+					$("#addName").val(),
+					$("#addAddress").val(),
+
 					action
 				]);
 				$('#addRowModal').modal('hide');
@@ -718,33 +666,30 @@
 			$('#add-row').DataTable();
 
 			$('#add-row').on('click', '.btn-edit', function () {
-				var inventoryId = $(this).data('inventoryId');
-				var mol = $(this).data('mol');
-				var filial = $(this).data('filial');
-				var equipment = $(this).data('equipment');
+				var filialId = $(this).data('filialId');
+				var name = $(this).data('name');
+				var address = $(this).data('address');
 
-				$('#editinventoryId').val(inventoryId);
-				$('#editmol').val(mol);
-				$('#editFilial').val(filial);
-				$('#editEquipment').val(equipment);
+
+				$('#editfilialId').val(filialId);
+				$('#editName').val(name);
+				$('#editAddress').val(address);
 
 				$('#editRowModal').modal('show');
 			});
 
 			$('#btnSaveEdit').click(function () {
-				var inventoryId = $('#editinventoryId').val();
-				var mol = $('#editmol').val();
-				var filial = $('#editFilial').val();
-				var equipment = $('#editEquipment').val();
+				var filialId = $('#editfilialId').val();
+				var name = $('#editName').val();
+				var address = $('#editAddress').val();
 
 				$.ajax({
-					url: '/inventory',
+					url: '/filials',
 					type: 'POST',
 					data: {
-						id: inventoryId,
-						mol: mol,
-						Filial: filial,
-						Equipment: equipment
+						id: filialId,
+						Name: name,
+						Address: address
 					},
 					success: function (response) {
 

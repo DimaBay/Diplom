@@ -1,49 +1,56 @@
-using inventory.Interfaces;
 using inventory.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace inventory.Pages
 {
-    public class filialsModel : PageModel
+    public class equipmentTypeModel : PageModel
     {
 		public DBFilial bFilial = new DBFilial();
 		public DBProfile bProfile = new DBProfile();
+		public DBTypeEquipment bTypeEquipment = new DBTypeEquipment();
 
 		public List<Profile> profiles = new List<Profile>();
+		public List<Filial> filials = new List<Filial>();
+
+		public List<TypeEquipment> equipmentTypeModels = new List<TypeEquipment>();
 
 		public Profile newProfile = new Profile();
 		public string UserRole { get; set; }
 		public string FirstName { get; set; }
 		public string Login { get; set; }
 		public string Email { get; set; }
-		public List<Filial> filials = new List<Filial>();
-		
-		public Filial newFilial = new Filial();
+	
 		
 
+		public Filial newFilial = new Filial();
+		
+		
+		public TypeEquipment newequipmentTypeModels = new TypeEquipment();
 		public void OnGet()
-		{
+        {
+
 			Login = HttpContext.Session.GetString("Login");
 			profiles = bProfile.AllProfile(Login).ToList();
-			filials = bFilial.AllFilial.ToList();
+			equipmentTypeModels = bTypeEquipment.AllTypeEquipment.ToList();
 			UserRole = HttpContext.Session.GetString("UserRole");
 			FirstName = HttpContext.Session.GetString("FirstName");
 			Email = HttpContext.Session.GetString("Email");
-		}
 
+
+		}
 		public IActionResult OnPost()
 		{
 
 
 
 
-			newFilial.Name = Request.Form["LastName"];
-			newFilial.Address = Request.Form["FirstName"];
-
-			bFilial.Add(newFilial);
-			filials = bFilial.AllFilial.ToList();
+			newequipmentTypeModels.Type = Request.Form["LastName"];
 			
+
+			bTypeEquipment.Add(newequipmentTypeModels);
+			equipmentTypeModels = bTypeEquipment.AllTypeEquipment.ToList();
+
 
 
 
@@ -54,14 +61,14 @@ namespace inventory.Pages
 
 		}
 		[BindProperty]
-		public Filial filial { get; set; }
+		public TypeEquipment typeEquipment { get; set; }
 
 		public IActionResult OnPostDelete()
 		{
-			
-			int result = bFilial.Delete(filial);
 
-			
+			int result = bTypeEquipment.Delete(typeEquipment);
+
+
 			return RedirectToPage();
 		}
 		public IActionResult OnPostEdit()
@@ -69,18 +76,17 @@ namespace inventory.Pages
 
 
 			int userId = int.Parse(Request.Form["id"]);
-			string newName = Request.Form["LastName"];
-			string newAddress = Request.Form["FirstName"];
-			
+			string newType = Request.Form["LastName"];
 
-			Filial filialToUpdate = new Filial()
+
+
+			TypeEquipment typeEquipmentToUpdate = new TypeEquipment()
 			{
-				id = userId,
-				Name = newName,
-				Address = newAddress
+				Id = userId,
+				Type = newType
 			};
 
-			int result = bFilial.Edit(filialToUpdate);
+			int result = bTypeEquipment.Edit(typeEquipmentToUpdate);
 
 
 

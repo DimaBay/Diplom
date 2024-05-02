@@ -1,4 +1,6 @@
-﻿namespace inventory.Models
+﻿using inventory.Pages;
+
+namespace inventory.Models
 {
 	public class Equipment
 	{
@@ -22,5 +24,6 @@
 		public string filial { get; set; }
 		public string? mol1 { get; set; }	
 		public List<Users> Users { get; set; }
+		public List<TypeEquipment> TypeEquipment { get; set; }
 	}
 }

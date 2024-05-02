@@ -10,12 +10,17 @@ namespace inventory.Pages
 		[TempData]
 		public string UserRole { get; set; }
 		public string FirstName { get; set; }
-		public DBFilial bFilial = new DBFilial();
+        public string LastName { get; set; }
+        public string Patronymic { get; set; }
+        public DBFilial bFilial = new DBFilial();
 		public DBUsers bUsers = new DBUsers();
 		public DBEquipment bEquipment = new DBEquipment();
+		public DBTypeEquipment bTypeEquipment = new DBTypeEquipment();
 		public List<Filial> filials = new List<Filial>();
 		public List<Users> users = new List<Users>();
 		public List<Equipment> equipment = new List<Equipment>();
+		public TypeEquipment newequipmentTypeModels = new TypeEquipment();
+		public List<TypeEquipment> equipmentTypeModels = new List<TypeEquipment>();
 		public Equipment newEquipment = new Equipment();
 		
 		public DBProfile bProfile = new DBProfile();
@@ -25,8 +30,7 @@ namespace inventory.Pages
 		public Profile newProfile = new Profile();
 		public string Email { get; set; }
 		public string Login { get; set; }
-		public string LastName { get; set; }
-		public string Patronymic { get; set; }
+		
 		
 
 		public void OnGet()
@@ -34,20 +38,24 @@ namespace inventory.Pages
 			Login = HttpContext.Session.GetString("Login");
 			profiles = bProfile.AllProfile(Login).ToList();
 
-
+			equipmentTypeModels = bTypeEquipment.AllTypeEquipment.ToList();
 			users = bUsers.AllUsers.ToList();
 			filials = bFilial.AllFilial.ToList();
-			equipment = bEquipment.AllEquipment.ToList();
+			/*equipment = bEquipment.AllEquipment.ToList();*/
 
 			UserRole = HttpContext.Session.GetString("UserRole");
 			FirstName = HttpContext.Session.GetString("FirstName");
-		
-			Email = HttpContext.Session.GetString("Email");
+			LastName = HttpContext.Session.GetString("LastName");
+			Patronymic = HttpContext.Session.GetString("Patronymic");
+                Email = HttpContext.Session.GetString("Email");
 			
+                equipment = bEquipment.GetEquipmentForUser(FirstName, LastName, Patronymic, UserRole).ToList();
+            
+            
 
 
-		}
-		public IActionResult OnPost()
+        }
+        public IActionResult OnPost()
 		{
 
 

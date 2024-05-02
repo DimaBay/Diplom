@@ -62,8 +62,80 @@ namespace inventory
 
 			}
 		}
+        public IEnumerable<Equipment> GetEquipmentForUser(string firstName, string lastName, string patronymic, string UserRole)
+        {
+            List<Equipment> equipment = new List<Equipment>();
 
-		public int Add(Equipment equipment)
+            string query = "SELECT * FROM DataBase.Equipment";
+
+            using (MySqlConnection connection = new MySqlConnection("server=127.0.0.1;port=3302;database=DataBase;uid=root;pwd=;"))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                {
+                    try
+                    {
+                        connection.Open();
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string molColumnValue = reader.GetString(9);
+                                string[] molArray = molColumnValue.Split(' ');
+
+
+
+
+                                if (UserRole == "Администратор")
+                                {
+                                    equipment.Add(new Equipment()
+                                    {
+                                        Id = reader.GetInt32(0),
+                                        personalNum = reader.GetString(1),
+                                        name = reader.GetString(2),
+                                        type = reader.GetString(3),
+                                        invnum = reader.GetString(4),
+                                        date = reader.GetString(5),
+                                        price = reader.GetString(6),
+                                        QR = reader.GetString(7),
+                                        filial = reader.GetString(8),
+                                        mol = reader.GetString(9)
+                                    });
+                                }
+
+
+
+                                 else if (UserRole != "Администратор" && molArray.Length == 3 && molArray[0] == lastName && molArray[1] == firstName && molArray[2] == patronymic)
+                                {
+                                    equipment.Add(new Equipment()
+                                    {
+                                        Id = reader.GetInt32(0),
+                                        personalNum = reader.GetString(1),
+                                        name = reader.GetString(2),
+                                        type = reader.GetString(3),
+                                        invnum = reader.GetString(4),
+                                        date = reader.GetString(5),
+                                        price = reader.GetString(6),
+                                        QR = reader.GetString(7),
+                                        filial = reader.GetString(8),
+                                        mol = reader.GetString(9)
+                                    });
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle exception
+                        Console.WriteLine(ex.Message);
+                    }
+                }
+            }
+
+            return equipment;
+        
+
+		}
+    public int Add(Equipment equipment)
 		{
 
 			var random = new Random();

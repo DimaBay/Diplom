@@ -251,6 +251,11 @@
 										<span class="sub-item">Инвентаризация</span>
 									</a>
 								</li>
+								<li>
+									<a href="equipmentType">
+										<span class="sub-item">Типы оборудования</span>
+									</a>
+								</li>
 							</ul>
 						</div>
 					</li>
@@ -317,12 +322,15 @@
 														<div class="form-group form-group-default">
 															<label>Выберете тип оборудования</label>
 															<select name="type" class="form-control" id="addTypeObject">
-																<option>Моноблоки</option>
-																<option>Маршрутизаторы</option>
-																<option>Комутаторы</option>
-																<option>МФУ</option>
-																<option>Неттопы</option>
+																@{
+																		foreach (var type in Model.equipmentTypeModels)
+																		{
+																		<option value="@type.Type">@type.Type</option>
+																
+																		}
+																	}
 															</select>
+															
 														</div>
 													</div>
 													<div class="col-sm-12">
@@ -616,11 +624,13 @@
 																							<div class="form-group form-group-default">
 																								<label>Выберете тип оборудования</label>
 																								<select name="type" class="form-control" id="edittype">
-																									<option>Моноблоки</option>
-																									<option>Маршрутизаторы</option>
-																									<option>Комутаторы</option>
-																									<option>МФУ</option>
-																									<option>Неттопы</option>
+																										@{
+																											foreach (var type in Model.equipmentTypeModels)
+																											{
+																											<option value="@type.Type">@type.Type</option>
+
+																											}
+																										}
 																								</select>
 																							</div>
 																						</div>
